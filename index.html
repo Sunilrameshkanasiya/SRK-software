@@ -3,91 +3,971 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MP Police Payroll - Login</title>
+    <title>MP Police Payroll System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="login-page">
+<body>
 
-    <div class="login-card">
+<div class="software">
 
-        <div class="logo">MP</div>
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
 
-        <h1>MP Police</h1>
-        <h2>Payroll Management System</h2>
-
-        <p class="welcome">
-            Welcome! Please login to continue.
-        </p>
-
-        <form onsubmit="login(event)">
-
-            <label>User ID</label>
-            <input
-                type="text"
-                id="username"
-                placeholder="Enter User ID"
-                required
-            >
-
-            <label>Password</label>
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter Password"
-                required
-            >
-
-            <button type="submit">
-                LOGIN
-            </button>
-
-            <p id="message"></p>
-
-        </form>
-
-        <div class="login-footer">
-            MP Police Payroll Software
+        <div class="logo-box">
+            <div class="logo">MP</div>
+            <div>
+                <b>MP POLICE</b>
+                <small>PAYROLL SYSTEM</small>
+            </div>
         </div>
 
-    </div>
+        <div class="menu">
+
+            <button onclick="openPage('home')">
+                <span>⌂</span> HOME
+            </button>
+
+            <button onclick="openPage('profile')">
+                <span>👤</span> PROFILE
+            </button>
+
+            <button onclick="openPage('salary')">
+                <span>₹</span> SALARY
+            </button>
+
+            <button onclick="openPage('petrol')">
+                <span>⛽</span> PETROL
+            </button>
+
+            <button onclick="openPage('reward')">
+                <span>★</span> REWARD
+            </button>
+
+            <button onclick="openPage('bank')">
+                <span>▣</span> BANK
+            </button>
+
+            <button onclick="openPage('bills')">
+                <span>▤</span> BILLS
+            </button>
+
+            <button onclick="openPage('billregister')">
+                <span>▥</span> BILL REGISTER
+            </button>
+
+            <button onclick="openPage('joining')">
+                <span>↪</span> JOINING
+            </button>
+
+            <button onclick="openPage('backup')">
+                <span>◩</span> BACKUP
+            </button>
+
+            <button onclick="openPage('replace')">
+                <span>⇄</span> REPLACE
+            </button>
+
+            <button onclick="openPage('settings')">
+                <span>⚙</span> SETTINGS
+            </button>
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+            <div class="user">
+                <div class="user-icon">S</div>
+
+                <div>
+                    <b id="sideUser">SUNIL</b>
+                    <small>Administrator</small>
+                </div>
+            </div>
+
+            <button class="logout" onclick="logout()">
+                LOG OUT
+            </button>
+
+        </div>
+
+    </aside>
 
 
-<script>
+    <!-- MAIN -->
+    <main class="main">
 
-function login(event) {
+        <!-- TOP HEADER -->
+        <header class="header">
 
-    event.preventDefault();
+            <div class="employee-info">
 
-    let username = document.getElementById("username").value.trim();
-    let password = document.getElementById("password").value.trim();
+                <div>
 
-    if (username === "admin" && password === "1234") {
+                    <h1 id="topName">
+                        SUNIL KANASIYA
+                    </h1>
 
-        document.getElementById("message").innerHTML =
-            "Login Successful...";
+                    <div class="employee-details">
 
-        document.getElementById("message").style.color = "green";
+                        <span id="topBno">
+                            380010562
+                        </span>
 
-        setTimeout(function () {
+                        <span id="topUnicode">
+                            380010562
+                        </span>
 
-            window.location.href = "dashboard.html";
+                        <span id="topRank">
+                            CONST
+                        </span>
 
-        }, 300);
+                        <span id="topPosting">
+                            CONST
+                        </span>
 
-    } 
-    else {
+                    </div>
 
-        document.getElementById("message").innerHTML =
-            "Wrong User ID or Password";
+                </div>
 
-        document.getElementById("message").style.color = "red";
+                <strong id="topCode">
+                    565
+                </strong>
 
-    }
+            </div>
 
-}
 
-</script>
+            <div class="header-controls">
+
+                <select id="month">
+
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option selected>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    id="year"
+                    value="2026"
+                >
+
+                <div class="clock" id="clock">
+                    28-09-2026 23:00:00
+                </div>
+
+                <div class="login-name">
+                    <b>SUNIL</b>
+                    <small>ADMIN</small>
+                </div>
+
+                <button
+                    class="header-logout"
+                    onclick="logout()">
+                    LOG OUT
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- OLD SOFTWARE STYLE TABS -->
+        <nav class="tabs">
+
+            <button onclick="openPage('profile')">
+                PROFILE
+            </button>
+
+            <button onclick="openPage('salary')">
+                SALARY
+            </button>
+
+            <button onclick="openPage('petrol')">
+                PETROL
+            </button>
+
+            <button onclick="openPage('reward')">
+                REWARD
+            </button>
+
+            <button onclick="openPage('bills')">
+                BILLS
+            </button>
+
+            <button onclick="openPage('bank')">
+                BANK
+            </button>
+
+            <button onclick="openPage('home')">
+                HOME
+            </button>
+
+            <button onclick="openPage('billregister')">
+                BILL REGISTER
+            </button>
+
+            <button onclick="openPage('joining')">
+                JOINING
+            </button>
+
+            <button onclick="openPage('backup')">
+                BACKUP
+            </button>
+
+            <button onclick="openPage('replace')">
+                REPLACE
+            </button>
+
+            <button onclick="openPage('settings')">
+                SETTINGS
+            </button>
+
+        </nav>
+
+
+        <!-- CONTENT -->
+        <div class="content">
+
+
+            <!-- HOME -->
+            <section id="home" class="page">
+
+                <div class="page-title">
+
+                    <div>
+                        <h2>
+                            MP POLICE PAYROLL
+                        </h2>
+
+                        <p>
+                            Employee & Salary Management System
+                        </p>
+                    </div>
+
+                    <button
+                        class="blue-button"
+                        onclick="openPage('profile')">
+                        + NEW EMPLOYEE
+                    </button>
+
+                </div>
+
+
+                <div class="dashboard-cards">
+
+                    <div class="dashboard-card">
+
+                        <small>
+                            TOTAL EMPLOYEES
+                        </small>
+
+                        <strong id="totalEmployees">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <small>
+                            SALARY RECORDS
+                        </small>
+
+                        <strong>
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <small>
+                            CURRENT MONTH
+                        </small>
+
+                        <strong id="currentMonth">
+                            SEPTEMBER
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <small>
+                            SYSTEM STATUS
+                        </small>
+
+                        <strong class="online">
+                            ONLINE
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="home-grid">
+
+                    <div class="box">
+
+                        <div class="box-title">
+                            QUICK ACTIONS
+                        </div>
+
+                        <div class="actions">
+
+                            <button onclick="openPage('profile')">
+                                👤 Employee Profile
+                            </button>
+
+                            <button onclick="openPage('salary')">
+                                ₹ Salary Entry
+                            </button>
+
+                            <button onclick="openPage('bank')">
+                                🏦 Bank Details
+                            </button>
+
+                            <button onclick="openPage('billregister')">
+                                📊 Bill Register
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="box">
+
+                        <div class="box-title">
+                            SELECTED EMPLOYEE
+                        </div>
+
+                        <div class="selected">
+
+                            <div class="big-user">
+                                S
+                            </div>
+
+                            <div>
+
+                                <b id="selectedName">
+                                    SUNIL KANASIYA
+                                </b>
+
+                                <p id="selectedDetails">
+                                    Employee information
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PROFILE -->
+            <section id="profile" class="page hidden">
+
+                <div class="page-title">
+
+                    <div>
+                        <h2>
+                            EMPLOYEE PROFILE
+                        </h2>
+
+                        <p>
+                            Employee basic information
+                        </p>
+                    </div>
+
+                    <div class="record">
+                        RECORD:
+                        <b id="recordId">
+                            NEW
+                        </b>
+                    </div>
+
+                </div>
+
+
+                <div class="box">
+
+                    <div class="box-title">
+                        BASIC INFORMATION
+                    </div>
+
+
+                    <form id="employeeForm">
+
+                        <div class="form-grid">
+
+
+                            <div class="field">
+
+                                <label>BNO</label>
+
+                                <input
+                                    type="text"
+                                    id="bno"
+                                    placeholder="Enter BNO">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>
+                                    UNICODE *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="unicode"
+                                    placeholder="Unique Unicode">
+
+                            </div>
+
+
+                            <div class="field large">
+
+                                <label>
+                                    EMPLOYEE NAME *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="Employee Name">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>RANK</label>
+
+                                <select id="rank">
+
+                                    <option value="">
+                                        Select Rank
+                                    </option>
+
+                                    <option>
+                                        CONST
+                                    </option>
+
+                                    <option>
+                                        HEAD CONST
+                                    </option>
+
+                                    <option>
+                                        ASI
+                                    </option>
+
+                                    <option>
+                                        SI
+                                    </option>
+
+                                    <option>
+                                        INSPECTOR
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>PRAN NO.</label>
+
+                                <input
+                                    type="text"
+                                    id="pran"
+                                    placeholder="PRAN">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>BASIC PAY</label>
+
+                                <input
+                                    type="number"
+                                    id="basic"
+                                    placeholder="Basic Pay">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>POSTING</label>
+
+                                <input
+                                    type="text"
+                                    id="posting"
+                                    placeholder="Posting">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>MOBILE</label>
+
+                                <input
+                                    type="tel"
+                                    id="mobile"
+                                    placeholder="Mobile">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>GPF / DPF / NPS</label>
+
+                                <input
+                                    type="text"
+                                    id="gpf"
+                                    placeholder="Account Number">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>DATE OF BIRTH</label>
+
+                                <input
+                                    type="date"
+                                    id="dob">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>DATE OF APPOINTMENT</label>
+
+                                <input
+                                    type="date"
+                                    id="doa">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>DATE OF JOINING</label>
+
+                                <input
+                                    type="date"
+                                    id="doj">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>DATE OF RETIREMENT</label>
+
+                                <input
+                                    type="date"
+                                    id="dor">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>STATUS</label>
+
+                                <select id="status">
+
+                                    <option>
+                                        ACTIVE
+                                    </option>
+
+                                    <option>
+                                        TRANSFERRED
+                                    </option>
+
+                                    <option>
+                                        RETIRED
+                                    </option>
+
+                                    <option>
+                                        INACTIVE
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="field large">
+
+                                <label>
+                                    REMARK
+                                </label>
+
+                                <textarea
+                                    id="remark"
+                                    placeholder="Remark"></textarea>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="buttons">
+
+                            <button
+                                type="button"
+                                class="save"
+                                onclick="saveEmployee()">
+                                SAVE
+                            </button>
+
+                            <button
+                                type="button"
+                                class="update"
+                                onclick="updateEmployee()">
+                                UPDATE
+                            </button>
+
+                            <button
+                                type="button"
+                                class="delete"
+                                onclick="deleteEmployee()">
+                                DELETE
+                            </button>
+
+                            <button
+                                type="button"
+                                class="search"
+                                onclick="searchEmployee()">
+                                SEARCH
+                            </button>
+
+                            <button
+                                type="button"
+                                class="clear"
+                                onclick="clearForm()">
+                                CLEAR
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- EMPLOYEE TABLE -->
+                <div class="box records">
+
+                    <div class="box-title table-heading">
+
+                        <span>
+                            EMPLOYEE RECORDS
+                        </span>
+
+                        <input
+                            type="text"
+                            id="tableSearch"
+                            placeholder="Search employee..."
+                            oninput="renderTable()">
+
+                    </div>
+
+
+                    <div class="table-scroll">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>UNICODE</th>
+                                    <th>BNO</th>
+                                    <th>NAME</th>
+                                    <th>RANK</th>
+                                    <th>POSTING</th>
+                                    <th>BASIC</th>
+                                    <th>STATUS</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="employeeTable">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SALARY -->
+            <section id="salary" class="page hidden">
+
+                <div class="page-title">
+
+                    <div>
+                        <h2>SALARY</h2>
+                        <p>Monthly salary management</p>
+                    </div>
+
+                </div>
+
+                <div class="salary-cards">
+
+                    <div>
+                        <small>BASIC PAY</small>
+                        <strong id="salaryBasic">₹ 0</strong>
+                    </div>
+
+                    <div>
+                        <small>GROSS TOTAL</small>
+                        <strong>₹ 0</strong>
+                    </div>
+
+                    <div>
+                        <small>DEDUCTION</small>
+                        <strong>₹ 0</strong>
+                    </div>
+
+                    <div>
+                        <small>NET TOTAL</small>
+                        <strong>₹ 0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="box module">
+
+                    <h3>
+                        SALARY ENTRY
+                    </h3>
+
+                    <p>
+                        Salary fields यहाँ add किए जाएंगे।
+                        आपके पुराने software के BASIC, DA, HRA,
+                        GPF, DPF, Recovery, Gross, Deduction और Net
+                        Total fields भी इसी module में जोड़े जा सकते हैं।
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- COMMON MODULES -->
+
+            <section id="petrol" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>PETROL</h2>
+                        <p>Petrol records</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>PETROL MANAGEMENT</h3>
+                    <p>
+                        Petrol quantity, amount, month और employee-wise records.
+                    </p>
+                </div>
+            </section>
+
+
+            <section id="reward" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>REWARD</h2>
+                        <p>Reward records</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>REWARD MANAGEMENT</h3>
+                    <p>
+                        Reward order, date, type और amount/details.
+                    </p>
+                </div>
+            </section>
+
+
+            <section id="bank" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>BANK</h2>
+                        <p>Employee bank information</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>BANK MANAGEMENT</h3>
+                    <p>
+                        Bank Name, Branch, Account Number और IFSC.
+                    </p>
+                </div>
+            </section>
+
+
+            <section id="bills" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>BILLS</h2>
+                        <p>Bill management</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>BILL MANAGEMENT</h3>
+                    <p>
+                        Bill Number, Month, Amount और Status.
+                    </p>
+                </div>
+            </section>
+
+
+            <section id="billregister" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>BILL REGISTER</h2>
+                        <p>Bill register and reports</p>
+                    </div>
+                </div>
+
+                <div class="report-buttons">
+
+                    <button onclick="exportCSV()">
+                        EXPORT EMPLOYEE CSV
+                    </button>
+
+                    <button onclick="window.print()">
+                        PRINT REPORT
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section id="joining" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>JOINING</h2>
+                        <p>Joining records</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>JOINING MANAGEMENT</h3>
+                    <p>
+                        Appointment, joining date और service information.
+                    </p>
+                </div>
+            </section>
+
+
+            <section id="backup" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>BACKUP</h2>
+                        <p>Database backup</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>BACKUP & RESTORE</h3>
+                    <p>
+                        Database backup और restore system.
+                    </p>
+                </div>
+            </section>
+
+
+            <section id="replace" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>REPLACE</h2>
+                        <p>Find and replace records</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>FIND / REPLACE</h3>
+                    <p>
+                        Selected table और column में find/replace.
+                    </p>
+                </div>
+            </section>
+
+
+            <section id="settings" class="page hidden">
+                <div class="page-title">
+                    <div>
+                        <h2>SETTINGS</h2>
+                        <p>System settings</p>
+                    </div>
+                </div>
+
+                <div class="box module">
+                    <h3>SYSTEM SETTINGS</h3>
+                    <p>
+                        User, security, financial year और system settings.
+                    </p>
+                </div>
+            </section>
+
+
+        </div>
+
+
+        <footer>
+            MP Police Payroll System
+            • Web Edition
+            • 2026
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
