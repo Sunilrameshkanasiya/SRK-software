@@ -1,114 +1,513 @@
-const STORAGE_KEY = "MP_POLICE_EMPLOYEES";
+/* =====================================================
+   MP POLICE PAYROLL SYSTEM
+   MAIN JAVASCRIPT
+===================================================== */
+
+
+/* =====================================================
+   LOGIN SETTINGS
+===================================================== */
+
+const LOGIN_USERNAME = "admin";
+const LOGIN_PASSWORD = "1234";
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const STORAGE_KEY =
+    "MP_POLICE_EMPLOYEE_RECORDS";
+
 
 let employees =
-    JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+    ) || [];
+
 
 let selectedUnicode = null;
 
 
-/* PAGE */
+/* =====================================================
+   PAGE LOAD
+===================================================== */
 
-function openPage(page){
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-    document
-        .querySelectorAll(".page")
-        .forEach(p => p.classList.add("hidden"));
+        checkLogin();
 
-    const selected =
-        document.getElementById(page);
+        renderTable();
 
-    if(selected){
-        selected.classList.remove("hidden");
+        updateClock();
+
+        setInterval(
+            updateClock,
+            1000
+        );
+
+    }
+);
+
+
+/* =====================================================
+   LOGIN CHECK
+===================================================== */
+
+function checkLogin(){
+
+    const loggedIn =
+        sessionStorage.getItem(
+            "MP_POLICE_LOGGED_IN"
+        );
+
+
+    if(loggedIn === "true"){
+
+        showSoftware();
+
+    }
+    else{
+
+        showLogin();
+
     }
 
 }
 
 
-/* CLOCK */
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
 
-function updateClock(){
+function showLogin(){
 
-    const now = new Date();
+    document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
 
-    const date =
-        String(now.getDate()).padStart(2,"0") +
-        "-" +
-        String(now.getMonth()+1).padStart(2,"0") +
-        "-" +
-        now.getFullYear();
 
-    const time =
-        now.toLocaleTimeString("en-IN",{
-            hour12:false
-        });
+    document
+        .getElementById("software")
+        .classList.add("hidden");
 
-    document.getElementById("clock").textContent =
-        date + " " + time;
+
+    setTimeout(
+        function(){
+
+            document
+                .getElementById("loginUsername")
+                .focus();
+
+        },
+        100
+    );
 
 }
 
-setInterval(updateClock,1000);
 
-updateClock();
+/* =====================================================
+   SHOW SOFTWARE
+===================================================== */
+
+function showSoftware(){
+
+    document
+        .getElementById("loginPage")
+        .classList.add("hidden");
 
 
-/* FORM DATA */
+    document
+        .getElementById("software")
+        .classList.remove("hidden");
 
-function getData(){
+
+    const username =
+        sessionStorage.getItem(
+            "MP_POLICE_USERNAME"
+        ) || "ADMIN";
+
+
+    document
+        .getElementById("loggedUser")
+        .textContent =
+        username.toUpperCase();
+
+
+    document
+        .getElementById("topUser")
+        .textContent =
+        username.toUpperCase();
+
+
+    /* HOME FIRST */
+
+    openPage("home");
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login(){
+
+    const username =
+        document
+            .getElementById("loginUsername")
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+
+    const message =
+        document
+            .getElementById("loginMessage");
+
+
+    message.textContent = "";
+
+
+    if(
+        username === LOGIN_USERNAME &&
+        password === LOGIN_PASSWORD
+    ){
+
+        sessionStorage.setItem(
+            "MP_POLICE_LOGGED_IN",
+            "true"
+        );
+
+
+        sessionStorage.setItem(
+            "MP_POLICE_USERNAME",
+            username
+        );
+
+
+        showSoftware();
+
+    }
+    else{
+
+        message.textContent =
+            "Invalid User Name or Password";
+
+
+        document
+            .getElementById("loginPassword")
+            .value = "";
+
+
+        document
+            .getElementById("loginPassword")
+            .focus();
+
+    }
+
+}
+
+
+/* =====================================================
+   ENTER KEY LOGIN
+===================================================== */
+
+function loginEnter(event){
+
+    if(event.key === "Enter"){
+
+        login();
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    const confirmLogout =
+        confirm(
+            "क्या आप Logout करना चाहते हैं?"
+        );
+
+
+    if(!confirmLogout){
+
+        return;
+
+    }
+
+
+    sessionStorage.removeItem(
+        "MP_POLICE_LOGGED_IN"
+    );
+
+
+    sessionStorage.removeItem(
+        "MP_POLICE_USERNAME"
+    );
+
+
+    document
+        .getElementById("loginUsername")
+        .value = "";
+
+
+    document
+        .getElementById("loginPassword")
+        .value = "";
+
+
+    document
+        .getElementById("loginMessage")
+        .textContent = "";
+
+
+    showLogin();
+
+}
+
+
+/* =====================================================
+   PAGE OPEN
+===================================================== */
+
+function openPage(
+    page,
+    clickedButton = null
+){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            function(p){
+
+                p.classList.add(
+                    "hidden"
+                );
+
+            }
+        );
+
+
+    const selected =
+        document.getElementById(page);
+
+
+    if(selected){
+
+        selected.classList.remove(
+            "hidden"
+        );
+
+    }
+
+
+    /* Sidebar active button */
+
+    document
+        .querySelectorAll(
+            ".menu-button"
+        )
+        .forEach(
+            function(button){
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    if(clickedButton){
+
+        clickedButton.classList.add(
+            "active"
+        );
+
+    }
+    else{
+
+        const sidebarButton =
+            document.querySelector(
+                `.menu-button[onclick*="'${page}'"]`
+            );
+
+
+        if(sidebarButton){
+
+            sidebarButton.classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    /* Scroll top */
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+/* =====================================================
+   CLOCK
+===================================================== */
+
+function updateClock(){
+
+    const now =
+        new Date();
+
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const year =
+        now.getFullYear();
+
+
+    const time =
+        now.toLocaleTimeString(
+            "en-IN",
+            {
+                hour12:false
+            }
+        );
+
+
+    const clock =
+        document.getElementById(
+            "clock"
+        );
+
+
+    if(clock){
+
+        clock.textContent =
+            `${day}-${month}-${year} ${time}`;
+
+    }
+
+}
+
+
+/* =====================================================
+   EMPLOYEE DATA
+===================================================== */
+
+function getEmployeeData(){
 
     return {
 
         bno:
-            document.getElementById("bno").value.trim(),
+            getValue("bno"),
 
         unicode:
-            document.getElementById("unicode").value.trim(),
+            getValue("unicode"),
 
         name:
-            document.getElementById("name").value.trim(),
+            getValue("name"),
 
         rank:
-            document.getElementById("rank").value,
+            getValue("rank"),
 
         pran:
-            document.getElementById("pran").value.trim(),
+            getValue("pran"),
 
         basic:
-            document.getElementById("basic").value.trim(),
+            getValue("basic"),
 
         posting:
-            document.getElementById("posting").value.trim(),
+            getValue("posting"),
 
         mobile:
-            document.getElementById("mobile").value.trim(),
+            getValue("mobile"),
 
         gpf:
-            document.getElementById("gpf").value.trim(),
+            getValue("gpf"),
 
         dob:
-            document.getElementById("dob").value,
+            getValue("dob"),
 
         doa:
-            document.getElementById("doa").value,
+            getValue("doa"),
 
         doj:
-            document.getElementById("doj").value,
+            getValue("doj"),
 
         dor:
-            document.getElementById("dor").value,
+            getValue("dor"),
 
         status:
-            document.getElementById("status").value,
+            getValue("status"),
 
         remark:
-            document.getElementById("remark").value.trim()
+            getValue("remark")
 
     };
 
 }
 
 
-/* SAVE STORAGE */
+/* =====================================================
+   GET VALUE
+===================================================== */
+
+function getValue(id){
+
+    const element =
+        document.getElementById(id);
+
+
+    if(!element){
+
+        return "";
+
+    }
+
+
+    return element.value.trim();
+
+}
+
+
+/* =====================================================
+   SAVE STORAGE
+===================================================== */
 
 function saveStorage(){
 
@@ -117,62 +516,65 @@ function saveStorage(){
         JSON.stringify(employees)
     );
 
-    renderTable();
 
-    updateEmployeeCount();
+    renderTable();
 
 }
 
 
-/* VALIDATION */
+/* =====================================================
+   SAVE EMPLOYEE
+===================================================== */
 
-function valid(data){
+function saveEmployee(){
+
+    const data =
+        getEmployeeData();
+
 
     if(!data.unicode){
 
-        alert("UNICODE दर्ज करें।");
+        alert(
+            "UNICODE दर्ज करें।"
+        );
 
         document
             .getElementById("unicode")
             .focus();
 
-        return false;
+        return;
 
     }
 
 
     if(!data.name){
 
-        alert("Employee Name दर्ज करें।");
+        alert(
+            "Employee Name दर्ज करें।"
+        );
 
         document
             .getElementById("name")
             .focus();
 
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-/* SAVE */
-
-function saveEmployee(){
-
-    const data = getData();
-
-    if(!valid(data)){
         return;
+
     }
 
 
     const exists =
         employees.some(
-            e => e.unicode === data.unicode
+            function(employee){
+
+                return (
+                    employee.unicode
+                    .toLowerCase()
+                    ===
+                    data.unicode
+                    .toLowerCase()
+                );
+
+            }
         );
 
 
@@ -193,29 +595,42 @@ function saveEmployee(){
 
     employees.push(data);
 
+
     selectedUnicode =
         data.unicode;
 
 
     saveStorage();
 
+
     loadEmployee(data);
 
+
     alert(
-        "Employee successfully saved."
+        "Employee Successfully Saved"
     );
 
 }
 
 
-/* UPDATE */
+/* =====================================================
+   UPDATE
+===================================================== */
 
 function updateEmployee(){
 
-    const data = getData();
+    const data =
+        getEmployeeData();
 
-    if(!valid(data)){
+
+    if(!data.unicode){
+
+        alert(
+            "पहले Employee Search करें।"
+        );
+
         return;
+
     }
 
 
@@ -226,14 +641,21 @@ function updateEmployee(){
 
     const index =
         employees.findIndex(
-            e => e.unicode === key
+            function(employee){
+
+                return (
+                    employee.unicode
+                    === key
+                );
+
+            }
         );
 
 
     if(index === -1){
 
         alert(
-            "Employee नहीं मिला। पहले SEARCH करें।"
+            "Employee Record नहीं मिला।"
         );
 
         return;
@@ -241,17 +663,16 @@ function updateEmployee(){
     }
 
 
-    employees[index] = {
+    data.created =
+        employees[index].created;
 
-        ...data,
 
-        created:
-            employees[index].created,
+    data.updated =
+        new Date().toISOString();
 
-        updated:
-            new Date().toISOString()
 
-    };
+    employees[index] =
+        data;
 
 
     selectedUnicode =
@@ -260,24 +681,26 @@ function updateEmployee(){
 
     saveStorage();
 
+
     loadEmployee(data);
 
+
     alert(
-        "Employee successfully updated."
+        "Employee Successfully Updated"
     );
 
 }
 
 
-/* DELETE */
+/* =====================================================
+   DELETE
+===================================================== */
 
 function deleteEmployee(){
 
     const key =
         selectedUnicode ||
-        document
-            .getElementById("unicode")
-            .value.trim();
+        getValue("unicode");
 
 
     if(!key){
@@ -293,14 +716,20 @@ function deleteEmployee(){
 
     const employee =
         employees.find(
-            e => e.unicode === key
+            function(item){
+
+                return (
+                    item.unicode === key
+                );
+
+            }
         );
 
 
     if(!employee){
 
         alert(
-            "Employee नहीं मिला।"
+            "Employee Record नहीं मिला।"
         );
 
         return;
@@ -310,36 +739,48 @@ function deleteEmployee(){
 
     const confirmDelete =
         confirm(
-            employee.name +
-            " का record delete करना है?"
+            `${employee.name} का record delete करना है?`
         );
 
 
     if(!confirmDelete){
+
         return;
+
     }
 
 
     employees =
         employees.filter(
-            e => e.unicode !== key
+            function(item){
+
+                return (
+                    item.unicode !== key
+                );
+
+            }
         );
 
 
     selectedUnicode = null;
 
+
     saveStorage();
+
 
     clearForm(false);
 
+
     alert(
-        "Employee deleted."
+        "Employee Deleted"
     );
 
 }
 
 
-/* SEARCH */
+/* =====================================================
+   SEARCH
+===================================================== */
 
 function searchEmployee(){
 
@@ -350,38 +791,56 @@ function searchEmployee(){
 
 
     if(!search){
+
         return;
+
     }
 
 
     const value =
-        search.toLowerCase().trim();
+        search
+            .toLowerCase()
+            .trim();
 
 
     const employee =
-        employees.find(e =>
+        employees.find(
+            function(item){
 
-            String(e.unicode)
-                .toLowerCase() === value
+                return (
 
-            ||
+                    String(
+                        item.unicode
+                    )
+                    .toLowerCase()
+                    === value
 
-            String(e.bno)
-                .toLowerCase() === value
+                    ||
 
-            ||
+                    String(
+                        item.bno
+                    )
+                    .toLowerCase()
+                    === value
 
-            String(e.name)
-                .toLowerCase()
-                .includes(value)
+                    ||
 
+                    String(
+                        item.name
+                    )
+                    .toLowerCase()
+                    .includes(value)
+
+                );
+
+            }
         );
 
 
     if(!employee){
 
         alert(
-            "Employee record नहीं मिला।"
+            "Employee Record नहीं मिला।"
         );
 
         return;
@@ -391,12 +850,17 @@ function searchEmployee(){
 
     loadEmployee(employee);
 
-    openPage("profile");
+
+    openPage(
+        "profile"
+    );
 
 }
 
 
-/* LOAD */
+/* =====================================================
+   LOAD EMPLOYEE
+===================================================== */
 
 function loadEmployee(employee){
 
@@ -425,128 +889,124 @@ function loadEmployee(employee){
     ];
 
 
-    fields.forEach(field => {
+    fields.forEach(
+        function(field){
 
-        const element =
-            document.getElementById(field);
+            const element =
+                document.getElementById(
+                    field
+                );
 
-        if(element){
 
-            element.value =
-                employee[field] || "";
+            if(element){
+
+                element.value =
+                    employee[field] || "";
+
+            }
 
         }
+    );
 
-    });
 
-
-    document.getElementById(
-        "recordId"
-    ).textContent =
+    document
+        .getElementById("recordId")
+        .textContent =
         employee.unicode;
 
 
-    updateHeader(employee);
+    updateTopEmployee(
+        employee
+    );
 
 }
 
 
-/* HEADER */
+/* =====================================================
+   UPDATE TOP HEADER
+===================================================== */
 
-function updateHeader(employee){
-
-    document.getElementById(
-        "topName"
-    ).textContent =
-        employee.name ||
-        "EMPLOYEE";
-
-
-    document.getElementById(
-        "topBno"
-    ).textContent =
-        employee.bno ||
-        "—";
-
-
-    document.getElementById(
-        "topUnicode"
-    ).textContent =
-        employee.unicode ||
-        "—";
-
-
-    document.getElementById(
-        "topRank"
-    ).textContent =
-        employee.rank ||
-        "—";
-
-
-    document.getElementById(
-        "topPosting"
-    ).textContent =
-        employee.posting ||
-        "—";
-
-
-    document.getElementById(
-        "topCode"
-    ).textContent =
-        employee.bno ||
-        "—";
-
-
-    document.getElementById(
-        "selectedName"
-    ).textContent =
-        employee.name ||
-        "Employee";
-
-
-    document.getElementById(
-        "selectedDetails"
-    ).textContent =
-
-        (employee.rank || "—") +
-        " • " +
-        (employee.posting || "—") +
-        " • Unicode " +
-        (employee.unicode || "—");
-
-
-    document.getElementById(
-        "salaryBasic"
-    ).textContent =
-        "₹ " +
-        Number(employee.basic || 0)
-            .toLocaleString("en-IN");
-
-}
-
-
-/* CLEAR */
-
-function clearForm(showAlert=true){
+function updateTopEmployee(
+    employee
+){
 
     document
-        .getElementById("employeeForm")
+        .getElementById("topName")
+        .textContent =
+        employee.name ||
+        "MP POLICE PAYROLL";
+
+
+    document
+        .getElementById("topBno")
+        .textContent =
+        employee.bno ||
+        "BNO";
+
+
+    document
+        .getElementById("topUnicode")
+        .textContent =
+        employee.unicode ||
+        "UNICODE";
+
+
+    document
+        .getElementById("topRank")
+        .textContent =
+        employee.rank ||
+        "RANK";
+
+
+    document
+        .getElementById("topPosting")
+        .textContent =
+        employee.posting ||
+        "POSTING";
+
+
+    document
+        .getElementById("topCode")
+        .textContent =
+        employee.bno ||
+        "—";
+
+}
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+function clearForm(
+    showMessage = true
+){
+
+    document
+        .getElementById(
+            "employeeForm"
+        )
         .reset();
 
 
-    document.getElementById(
-        "recordId"
-    ).textContent =
+    document
+        .getElementById(
+            "recordId"
+        )
+        .textContent =
         "NEW";
 
 
     selectedUnicode = null;
 
 
-    if(showAlert){
+    resetTopHeader();
+
+
+    if(showMessage){
 
         alert(
-            "Form cleared."
+            "Form Cleared"
         );
 
     }
@@ -554,68 +1014,144 @@ function clearForm(showAlert=true){
 }
 
 
-/* TABLE */
+/* =====================================================
+   RESET TOP HEADER
+===================================================== */
+
+function resetTopHeader(){
+
+    document
+        .getElementById("topName")
+        .textContent =
+        "MP POLICE PAYROLL";
+
+
+    document
+        .getElementById("topBno")
+        .textContent =
+        "BNO";
+
+
+    document
+        .getElementById("topUnicode")
+        .textContent =
+        "UNICODE";
+
+
+    document
+        .getElementById("topRank")
+        .textContent =
+        "RANK";
+
+
+    document
+        .getElementById("topPosting")
+        .textContent =
+        "POSTING";
+
+
+    document
+        .getElementById("topCode")
+        .textContent =
+        "—";
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
 
 function renderTable(){
 
-    const tbody =
+    const table =
         document.getElementById(
             "employeeTable"
         );
 
 
-    const search =
+    if(!table){
+
+        return;
+
+    }
+
+
+    const searchElement =
         document.getElementById(
             "tableSearch"
-        ).value
-        .toLowerCase()
-        .trim();
+        );
+
+
+    const search =
+        searchElement
+            ? searchElement.value
+                .toLowerCase()
+                .trim()
+            : "";
 
 
     const records =
-        employees.filter(e =>
+        employees.filter(
+            function(employee){
 
-            !search
+                if(!search){
 
-            ||
+                    return true;
 
-            String(e.unicode)
-                .toLowerCase()
-                .includes(search)
+                }
 
-            ||
 
-            String(e.bno)
-                .toLowerCase()
-                .includes(search)
+                return (
 
-            ||
+                    String(
+                        employee.unicode
+                    )
+                    .toLowerCase()
+                    .includes(search)
 
-            String(e.name)
-                .toLowerCase()
-                .includes(search)
+                    ||
 
-            ||
+                    String(
+                        employee.bno
+                    )
+                    .toLowerCase()
+                    .includes(search)
 
-            String(e.posting)
-                .toLowerCase()
-                .includes(search)
+                    ||
 
+                    String(
+                        employee.name
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        employee.posting
+                    )
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+            }
         );
 
 
     if(records.length === 0){
 
-        tbody.innerHTML = `
+        table.innerHTML = `
 
             <tr>
 
                 <td
                     colspan="7"
                     style="
-                    text-align:center;
-                    padding:25px;
-                    color:#7b8798;
+                        text-align:center;
+                        padding:25px;
+                        color:#7c899a;
                     "
                 >
 
@@ -632,70 +1168,112 @@ function renderTable(){
     }
 
 
-    tbody.innerHTML =
-        records.map(employee => `
+    table.innerHTML =
+        records
+        .map(
+            function(employee){
 
-        <tr
-            onclick='selectRow(${JSON.stringify(employee)})'
-        >
+                return `
 
-            <td>
-                <b>
-                    ${escapeHTML(employee.unicode)}
-                </b>
-            </td>
+                    <tr
+                        onclick='selectEmployee(
+                            ${JSON.stringify(employee)}
+                        )'
+                    >
 
-            <td>
-                ${escapeHTML(employee.bno)}
-            </td>
+                        <td>
+                            <b>
+                                ${escapeHTML(
+                                    employee.unicode
+                                )}
+                            </b>
+                        </td>
 
-            <td>
-                ${escapeHTML(employee.name)}
-            </td>
+                        <td>
+                            ${escapeHTML(
+                                employee.bno
+                            )}
+                        </td>
 
-            <td>
-                ${escapeHTML(employee.rank)}
-            </td>
+                        <td>
+                            ${escapeHTML(
+                                employee.name
+                            )}
+                        </td>
 
-            <td>
-                ${escapeHTML(employee.posting)}
-            </td>
+                        <td>
+                            ${escapeHTML(
+                                employee.rank
+                            )}
+                        </td>
 
-            <td>
-                ₹ ${Number(employee.basic || 0)
-                    .toLocaleString("en-IN")}
-            </td>
+                        <td>
+                            ${escapeHTML(
+                                employee.posting
+                            )}
+                        </td>
 
-            <td>
-                ${escapeHTML(employee.status)}
-            </td>
+                        <td>
+                            ₹ ${Number(
+                                employee.basic || 0
+                            ).toLocaleString(
+                                "en-IN"
+                            )}
+                        </td>
 
-        </tr>
+                        <td>
+                            ${escapeHTML(
+                                employee.status
+                            )}
+                        </td>
 
-    `).join("");
+                    </tr>
+
+                `;
+
+            }
+        )
+        .join("");
 
 }
 
 
-/* SELECT TABLE ROW */
+/* =====================================================
+   SELECT EMPLOYEE
+===================================================== */
 
-function selectRow(employee){
+function selectEmployee(
+    employee
+){
 
-    loadEmployee(employee);
+    loadEmployee(
+        employee
+    );
 
-    openPage("profile");
+
+    openPage(
+        "profile"
+    );
 
 }
 
 
-/* ESCAPE HTML */
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-function escapeHTML(value){
+function escapeHTML(
+    value
+){
 
-    return String(value || "")
-        .replace(
-            /[&<>"']/g,
-            character => ({
+    return String(
+        value || ""
+    )
+    .replace(
+        /[&<>"']/g,
+        function(character){
+
+            return {
 
                 "&":"&amp;",
                 "<":"&lt;",
@@ -703,42 +1281,17 @@ function escapeHTML(value){
                 '"':"&quot;",
                 "'":"&#039;"
 
-            })[character]
-        );
-
-}
-
-
-/* COUNT */
-
-function updateEmployeeCount(){
-
-    document.getElementById(
-        "totalEmployees"
-    ).textContent =
-        employees.length;
-
-}
-
-
-/* MONTH */
-
-document
-    .getElementById("month")
-    .addEventListener(
-        "change",
-        function(){
-
-            document.getElementById(
-                "currentMonth"
-            ).textContent =
-                this.value.toUpperCase();
+            }[character];
 
         }
     );
 
+}
 
-/* EXPORT */
+
+/* =====================================================
+   EXPORT CSV
+===================================================== */
 
 function exportCSV(){
 
@@ -747,7 +1300,7 @@ function exportCSV(){
     ){
 
         alert(
-            "Export करने के लिए employee records नहीं हैं।"
+            "Export करने के लिए Employee Records नहीं हैं।"
         );
 
         return;
@@ -798,33 +1351,44 @@ function exportCSV(){
 
 
     let csv =
-        headers.join(",") +
-        "\n";
+        headers.join(",")
+        + "\n";
 
 
-    employees.forEach(employee => {
+    employees.forEach(
+        function(employee){
 
-        csv +=
+            csv +=
 
-            keys
+                keys
                 .map(
-                    key =>
-                        `"${String(
+                    function(key){
+
+                        return `"${String(
                             employee[key] || ""
-                        ).replaceAll('"','""')}"`
+                        ).replaceAll(
+                            '"',
+                            '""'
+                        )}"`;
+
+                    }
                 )
                 .join(",")
 
-            +
+                +
 
-            "\n";
+                "\n";
 
-    });
+        }
+    );
 
 
     const blob =
         new Blob(
-            ["\ufeff" + csv],
+            [
+                "\ufeff" +
+                csv
+            ],
             {
                 type:
                     "text/csv;charset=utf-8"
@@ -833,11 +1397,15 @@ function exportCSV(){
 
 
     const link =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
 
     link.href =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
 
     link.download =
@@ -845,31 +1413,5 @@ function exportCSV(){
 
 
     link.click();
-
-}
-
-
-/* LOGOUT */
-
-function logout(){
-
-    alert(
-        "Logout system next step में Login Page से connect किया जाएगा।"
-    );
-
-}
-
-
-/* START */
-
-renderTable();
-
-updateEmployeeCount();
-
-if(employees.length > 0){
-
-    loadEmployee(
-        employees[0]
-    );
 
 }

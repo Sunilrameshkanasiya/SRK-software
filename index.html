@@ -3,141 +3,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>MP Police Payroll System</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="software">
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
 
-    <!-- LEFT SIDEBAR -->
+<div id="loginPage" class="login-page">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            MP
+        </div>
+
+        <h1>MP POLICE</h1>
+
+        <h2>PAYROLL SYSTEM</h2>
+
+        <p class="login-subtitle">
+            Employee Management System
+        </p>
+
+
+        <div class="login-form">
+
+            <label>
+                USER NAME
+            </label>
+
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="Enter User Name"
+                autocomplete="username"
+            >
+
+
+            <label>
+                PASSWORD
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter Password"
+                autocomplete="current-password"
+                onkeydown="loginEnter(event)"
+            >
+
+
+            <button
+                class="login-button"
+                onclick="login()"
+            >
+                LOGIN
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="login-message"
+            ></div>
+
+        </div>
+
+
+        <div class="login-footer">
+            MP Police Payroll System • 2026
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN SOFTWARE
+===================================================== -->
+
+<div
+    id="software"
+    class="software hidden"
+>
+
+
+    <!-- =================================================
+         LEFT SIDEBAR
+    ================================================== -->
+
     <aside class="sidebar">
 
+
+        <!-- LOGO -->
+
         <div class="logo-box">
-            <div class="logo">MP</div>
-            <div>
-                <b>MP POLICE</b>
-                <small>PAYROLL SYSTEM</small>
+
+            <div class="logo">
+                MP
             </div>
+
+            <div>
+
+                <b>MP POLICE</b>
+
+                <small>
+                    PAYROLL SYSTEM
+                </small>
+
+            </div>
+
         </div>
+
+
+        <!-- MENU -->
 
         <div class="menu">
 
-            <button onclick="openPage('home')">
-                <span>⌂</span> HOME
+
+            <div class="menu-heading">
+                MAIN MENU
+            </div>
+
+
+            <button
+                class="menu-button active"
+                onclick="openPage('home', this)"
+            >
+                <span>⌂</span>
+                HOME
             </button>
 
-            <button onclick="openPage('profile')">
-                <span>👤</span> PROFILE
+
+            <button
+                class="menu-button"
+                onclick="openPage('profile', this)"
+            >
+                <span>👤</span>
+                PROFILE
             </button>
 
-            <button onclick="openPage('salary')">
-                <span>₹</span> SALARY
+
+            <button
+                class="menu-button"
+                onclick="openPage('salary', this)"
+            >
+                <span>₹</span>
+                SALARY
             </button>
 
-            <button onclick="openPage('petrol')">
-                <span>⛽</span> PETROL
+
+            <button
+                class="menu-button"
+                onclick="openPage('petrol', this)"
+            >
+                <span>⛽</span>
+                PETROL
             </button>
 
-            <button onclick="openPage('reward')">
-                <span>★</span> REWARD
+
+            <button
+                class="menu-button"
+                onclick="openPage('reward', this)"
+            >
+                <span>★</span>
+                REWARD
             </button>
 
-            <button onclick="openPage('bank')">
-                <span>▣</span> BANK
+
+            <button
+                class="menu-button"
+                onclick="openPage('bank', this)"
+            >
+                <span>▣</span>
+                BANK
             </button>
 
-            <button onclick="openPage('bills')">
-                <span>▤</span> BILLS
+
+            <button
+                class="menu-button"
+                onclick="openPage('bills', this)"
+            >
+                <span>▤</span>
+                BILLS
             </button>
 
-            <button onclick="openPage('billregister')">
-                <span>▥</span> BILL REGISTER
+
+            <button
+                class="menu-button"
+                onclick="openPage('billregister', this)"
+            >
+                <span>▥</span>
+                BILL REGISTER
             </button>
 
-            <button onclick="openPage('joining')">
-                <span>↪</span> JOINING
+
+            <div class="menu-heading system-heading">
+                OTHER
+            </div>
+
+
+            <button
+                class="menu-button"
+                onclick="openPage('joining', this)"
+            >
+                <span>↪</span>
+                JOINING
             </button>
 
-            <button onclick="openPage('backup')">
-                <span>◩</span> BACKUP
+
+            <button
+                class="menu-button"
+                onclick="openPage('backup', this)"
+            >
+                <span>◩</span>
+                BACKUP
             </button>
 
-            <button onclick="openPage('replace')">
-                <span>⇄</span> REPLACE
+
+            <button
+                class="menu-button"
+                onclick="openPage('replace', this)"
+            >
+                <span>⇄</span>
+                REPLACE
             </button>
 
-            <button onclick="openPage('settings')">
-                <span>⚙</span> SETTINGS
+
+            <button
+                class="menu-button"
+                onclick="openPage('settings', this)"
+            >
+                <span>⚙</span>
+                SETTINGS
             </button>
+
 
         </div>
 
+
+        <!-- USER AREA -->
+
         <div class="sidebar-bottom">
 
-            <div class="user">
-                <div class="user-icon">S</div>
+            <div class="user-area">
+
+                <div class="user-circle">
+                    S
+                </div>
 
                 <div>
-                    <b id="sideUser">SUNIL</b>
-                    <small>Administrator</small>
+
+                    <b id="loggedUser">
+                        ADMIN
+                    </b>
+
+                    <small>
+                        Administrator
+                    </small>
+
                 </div>
+
             </div>
 
-            <button class="logout" onclick="logout()">
+
+            <button
+                class="logout-button"
+                onclick="logout()"
+            >
                 LOG OUT
             </button>
 
         </div>
 
+
     </aside>
 
 
-    <!-- MAIN -->
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
     <main class="main">
 
-        <!-- TOP HEADER -->
-        <header class="header">
 
-            <div class="employee-info">
+        <!-- =================================================
+             TOP HEADER
+        ================================================== -->
 
-                <div>
+        <header class="top-header">
+
+
+            <div class="employee-header">
+
+
+                <div class="employee-title">
 
                     <h1 id="topName">
-                        SUNIL KANASIYA
+                        MP POLICE PAYROLL
                     </h1>
 
-                    <div class="employee-details">
+                    <div class="employee-info">
 
                         <span id="topBno">
-                            380010562
+                            BNO
                         </span>
 
                         <span id="topUnicode">
-                            380010562
+                            UNICODE
                         </span>
 
                         <span id="topRank">
-                            CONST
+                            RANK
                         </span>
 
                         <span id="topPosting">
-                            CONST
+                            POSTING
                         </span>
 
                     </div>
 
                 </div>
 
-                <strong id="topCode">
-                    565
-                </strong>
+
+                <div
+                    class="employee-number"
+                    id="topCode"
+                >
+                    —
+                </div>
+
 
             </div>
 
 
-            <div class="header-controls">
+
+            <div class="top-controls">
+
 
                 <select id="month">
 
@@ -149,12 +359,17 @@
                     <option>June</option>
                     <option>July</option>
                     <option>August</option>
-                    <option selected>September</option>
+
+                    <option selected>
+                        September
+                    </option>
+
                     <option>October</option>
                     <option>November</option>
                     <option>December</option>
 
                 </select>
+
 
                 <input
                     type="number"
@@ -162,276 +377,260 @@
                     value="2026"
                 >
 
-                <div class="clock" id="clock">
+
+                <div
+                    class="date-time"
+                    id="clock"
+                >
                     28-09-2026 23:00:00
                 </div>
 
-                <div class="login-name">
-                    <b>SUNIL</b>
-                    <small>ADMIN</small>
+
+                <div class="top-user">
+
+                    <b id="topUser">
+                        ADMIN
+                    </b>
+
+                    <small>
+                        USER
+                    </small>
+
                 </div>
 
+
                 <button
-                    class="header-logout"
-                    onclick="logout()">
+                    class="top-logout"
+                    onclick="logout()"
+                >
                     LOG OUT
                 </button>
 
+
             </div>
+
 
         </header>
 
 
-        <!-- OLD SOFTWARE STYLE TABS -->
+
+        <!-- =================================================
+             OLD SOFTWARE STYLE TABS
+        ================================================== -->
+
         <nav class="tabs">
 
-            <button onclick="openPage('profile')">
+
+            <button
+                onclick="openPage('profile')"
+            >
                 PROFILE
             </button>
 
-            <button onclick="openPage('salary')">
+
+            <button
+                onclick="openPage('salary')"
+            >
                 SALARY
             </button>
 
-            <button onclick="openPage('petrol')">
+
+            <button
+                onclick="openPage('petrol')"
+            >
                 PETROL
             </button>
 
-            <button onclick="openPage('reward')">
+
+            <button
+                onclick="openPage('reward')"
+            >
                 REWARD
             </button>
 
-            <button onclick="openPage('bills')">
+
+            <button
+                onclick="openPage('bills')"
+            >
                 BILLS
             </button>
 
-            <button onclick="openPage('bank')">
+
+            <button
+                onclick="openPage('bank')"
+            >
                 BANK
             </button>
 
-            <button onclick="openPage('home')">
+
+            <button
+                onclick="openPage('home')"
+            >
                 HOME
             </button>
 
-            <button onclick="openPage('billregister')">
+
+            <button
+                onclick="openPage('billregister')"
+            >
                 BILL REGISTER
             </button>
 
-            <button onclick="openPage('joining')">
+
+            <button
+                onclick="openPage('joining')"
+            >
                 JOINING
             </button>
 
-            <button onclick="openPage('backup')">
+
+            <button
+                onclick="openPage('backup')"
+            >
                 BACKUP
             </button>
 
-            <button onclick="openPage('replace')">
+
+            <button
+                onclick="openPage('replace')"
+            >
                 REPLACE
             </button>
 
-            <button onclick="openPage('settings')">
+
+            <button
+                onclick="openPage('settings')"
+            >
                 SETTINGS
             </button>
+
 
         </nav>
 
 
-        <!-- CONTENT -->
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
         <div class="content">
 
 
-            <!-- HOME -->
-            <section id="home" class="page">
+            <!-- =================================================
+                 HOME
+            ================================================== -->
 
-                <div class="page-title">
+            <section
+                id="home"
+                class="page"
+            >
 
-                    <div>
-                        <h2>
-                            MP POLICE PAYROLL
-                        </h2>
+                <div class="home-screen">
 
-                        <p>
-                            Employee & Salary Management System
-                        </p>
-                    </div>
-
-                    <button
-                        class="blue-button"
-                        onclick="openPage('profile')">
-                        + NEW EMPLOYEE
-                    </button>
-
-                </div>
-
-
-                <div class="dashboard-cards">
-
-                    <div class="dashboard-card">
-
-                        <small>
-                            TOTAL EMPLOYEES
-                        </small>
-
-                        <strong id="totalEmployees">
-                            0
-                        </strong>
-
+                    <div class="home-logo">
+                        MP
                     </div>
 
 
-                    <div class="dashboard-card">
-
-                        <small>
-                            SALARY RECORDS
-                        </small>
-
-                        <strong>
-                            0
-                        </strong>
-
-                    </div>
+                    <h2>
+                        MP POLICE PAYROLL SYSTEM
+                    </h2>
 
 
-                    <div class="dashboard-card">
-
-                        <small>
-                            CURRENT MONTH
-                        </small>
-
-                        <strong id="currentMonth">
-                            SEPTEMBER
-                        </strong>
-
-                    </div>
+                    <p>
+                        Employee & Payroll Management System
+                    </p>
 
 
-                    <div class="dashboard-card">
-
-                        <small>
-                            SYSTEM STATUS
-                        </small>
-
-                        <strong class="online">
-                            ONLINE
-                        </strong>
-
-                    </div>
-
-                </div>
+                    <div class="home-line"></div>
 
 
-                <div class="home-grid">
-
-                    <div class="box">
-
-                        <div class="box-title">
-                            QUICK ACTIONS
-                        </div>
-
-                        <div class="actions">
-
-                            <button onclick="openPage('profile')">
-                                👤 Employee Profile
-                            </button>
-
-                            <button onclick="openPage('salary')">
-                                ₹ Salary Entry
-                            </button>
-
-                            <button onclick="openPage('bank')">
-                                🏦 Bank Details
-                            </button>
-
-                            <button onclick="openPage('billregister')">
-                                📊 Bill Register
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="box">
-
-                        <div class="box-title">
-                            SELECTED EMPLOYEE
-                        </div>
-
-                        <div class="selected">
-
-                            <div class="big-user">
-                                S
-                            </div>
-
-                            <div>
-
-                                <b id="selectedName">
-                                    SUNIL KANASIYA
-                                </b>
-
-                                <p id="selectedDetails">
-                                    Employee information
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    <span>
+                        Select a module from the menu
+                    </span>
 
                 </div>
 
             </section>
 
 
-            <!-- PROFILE -->
-            <section id="profile" class="page hidden">
+
+            <!-- =================================================
+                 PROFILE
+            ================================================== -->
+
+            <section
+                id="profile"
+                class="page hidden"
+            >
+
 
                 <div class="page-title">
 
                     <div>
+
                         <h2>
                             EMPLOYEE PROFILE
                         </h2>
 
                         <p>
-                            Employee basic information
+                            Employee basic and service information
                         </p>
+
                     </div>
 
-                    <div class="record">
+
+                    <div class="record-number">
+
                         RECORD:
                         <b id="recordId">
                             NEW
                         </b>
+
                     </div>
 
                 </div>
 
 
+
+                <!-- PROFILE FORM -->
+
                 <div class="box">
+
 
                     <div class="box-title">
                         BASIC INFORMATION
                     </div>
 
 
-                    <form id="employeeForm">
+                    <form
+                        id="employeeForm"
+                        autocomplete="off"
+                    >
+
 
                         <div class="form-grid">
 
 
+                            <!-- BNO -->
+
                             <div class="field">
 
-                                <label>BNO</label>
+                                <label>
+                                    BNO
+                                </label>
 
                                 <input
                                     type="text"
                                     id="bno"
-                                    placeholder="Enter BNO">
+                                    placeholder="Enter BNO"
+                                >
 
                             </div>
 
+
+
+                            <!-- UNICODE -->
 
                             <div class="field">
 
@@ -442,10 +641,14 @@
                                 <input
                                     type="text"
                                     id="unicode"
-                                    placeholder="Unique Unicode">
+                                    placeholder="Unique Unicode"
+                                >
 
                             </div>
 
+
+
+                            <!-- NAME -->
 
                             <div class="field large">
 
@@ -456,14 +659,20 @@
                                 <input
                                     type="text"
                                     id="name"
-                                    placeholder="Employee Name">
+                                    placeholder="Employee Name"
+                                >
 
                             </div>
 
 
+
+                            <!-- RANK -->
+
                             <div class="field">
 
-                                <label>RANK</label>
+                                <label>
+                                    RANK
+                                </label>
 
                                 <select id="rank">
 
@@ -496,113 +705,172 @@
                             </div>
 
 
+
+                            <!-- PRAN -->
+
                             <div class="field">
 
-                                <label>PRAN NO.</label>
+                                <label>
+                                    PRAN NO.
+                                </label>
 
                                 <input
                                     type="text"
                                     id="pran"
-                                    placeholder="PRAN">
+                                    placeholder="PRAN Number"
+                                >
 
                             </div>
 
 
+
+                            <!-- BASIC -->
+
                             <div class="field">
 
-                                <label>BASIC PAY</label>
+                                <label>
+                                    BASIC PAY
+                                </label>
 
                                 <input
                                     type="number"
                                     id="basic"
-                                    placeholder="Basic Pay">
+                                    placeholder="Basic Pay"
+                                >
 
                             </div>
 
 
+
+                            <!-- POSTING -->
+
                             <div class="field">
 
-                                <label>POSTING</label>
+                                <label>
+                                    POSTING
+                                </label>
 
                                 <input
                                     type="text"
                                     id="posting"
-                                    placeholder="Posting">
+                                    placeholder="Posting"
+                                >
 
                             </div>
 
 
+
+                            <!-- MOBILE -->
+
                             <div class="field">
 
-                                <label>MOBILE</label>
+                                <label>
+                                    MOBILE
+                                </label>
 
                                 <input
                                     type="tel"
                                     id="mobile"
-                                    placeholder="Mobile">
+                                    placeholder="Mobile Number"
+                                >
 
                             </div>
 
 
+
+                            <!-- GPF -->
+
                             <div class="field">
 
-                                <label>GPF / DPF / NPS</label>
+                                <label>
+                                    GPF / DPF / NPS
+                                </label>
 
                                 <input
                                     type="text"
                                     id="gpf"
-                                    placeholder="Account Number">
+                                    placeholder="Account Number"
+                                >
 
                             </div>
 
 
+
+                            <!-- DOB -->
+
                             <div class="field">
 
-                                <label>DATE OF BIRTH</label>
+                                <label>
+                                    DATE OF BIRTH
+                                </label>
 
                                 <input
                                     type="date"
-                                    id="dob">
+                                    id="dob"
+                                >
 
                             </div>
 
 
+
+                            <!-- DOA -->
+
                             <div class="field">
 
-                                <label>DATE OF APPOINTMENT</label>
+                                <label>
+                                    DATE OF APPOINTMENT
+                                </label>
 
                                 <input
                                     type="date"
-                                    id="doa">
+                                    id="doa"
+                                >
 
                             </div>
 
 
+
+                            <!-- DOJ -->
+
                             <div class="field">
 
-                                <label>DATE OF JOINING</label>
+                                <label>
+                                    DATE OF JOINING
+                                </label>
 
                                 <input
                                     type="date"
-                                    id="doj">
+                                    id="doj"
+                                >
 
                             </div>
 
 
+
+                            <!-- DOR -->
+
                             <div class="field">
 
-                                <label>DATE OF RETIREMENT</label>
+                                <label>
+                                    DATE OF RETIREMENT
+                                </label>
 
                                 <input
                                     type="date"
-                                    id="dor">
+                                    id="dor"
+                                >
 
                             </div>
 
 
+
+                            <!-- STATUS -->
+
                             <div class="field">
 
-                                <label>STATUS</label>
+                                <label>
+                                    STATUS
+                                </label>
 
                                 <select id="status">
 
@@ -627,6 +895,9 @@
                             </div>
 
 
+
+                            <!-- REMARK -->
+
                             <div class="field large">
 
                                 <label>
@@ -635,7 +906,8 @@
 
                                 <textarea
                                     id="remark"
-                                    placeholder="Remark"></textarea>
+                                    placeholder="Remark"
+                                ></textarea>
 
                             </div>
 
@@ -643,66 +915,88 @@
                         </div>
 
 
+
+                        <!-- BUTTONS -->
+
                         <div class="buttons">
+
 
                             <button
                                 type="button"
-                                class="save"
-                                onclick="saveEmployee()">
+                                class="btn-save"
+                                onclick="saveEmployee()"
+                            >
                                 SAVE
                             </button>
 
+
                             <button
                                 type="button"
-                                class="update"
-                                onclick="updateEmployee()">
+                                class="btn-update"
+                                onclick="updateEmployee()"
+                            >
                                 UPDATE
                             </button>
 
+
                             <button
                                 type="button"
-                                class="delete"
-                                onclick="deleteEmployee()">
+                                class="btn-delete"
+                                onclick="deleteEmployee()"
+                            >
                                 DELETE
                             </button>
 
+
                             <button
                                 type="button"
-                                class="search"
-                                onclick="searchEmployee()">
+                                class="btn-search"
+                                onclick="searchEmployee()"
+                            >
                                 SEARCH
                             </button>
 
+
                             <button
                                 type="button"
-                                class="clear"
-                                onclick="clearForm()">
+                                class="btn-clear"
+                                onclick="clearForm()"
+                            >
                                 CLEAR
                             </button>
 
+
                         </div>
 
+
                     </form>
+
 
                 </div>
 
 
-                <!-- EMPLOYEE TABLE -->
-                <div class="box records">
 
-                    <div class="box-title table-heading">
+                <!-- RECORD TABLE -->
+
+                <div class="box">
+
+
+                    <div class="box-title table-title">
 
                         <span>
                             EMPLOYEE RECORDS
                         </span>
 
+
                         <input
                             type="text"
                             id="tableSearch"
-                            placeholder="Search employee..."
-                            oninput="renderTable()">
+                            placeholder="Search..."
+                            oninput="renderTable()"
+                        >
 
                     </div>
+
 
 
                     <div class="table-scroll">
@@ -713,244 +1007,567 @@
 
                                 <tr>
 
-                                    <th>UNICODE</th>
-                                    <th>BNO</th>
-                                    <th>NAME</th>
-                                    <th>RANK</th>
-                                    <th>POSTING</th>
-                                    <th>BASIC</th>
-                                    <th>STATUS</th>
+                                    <th>
+                                        UNICODE
+                                    </th>
+
+                                    <th>
+                                        BNO
+                                    </th>
+
+                                    <th>
+                                        NAME
+                                    </th>
+
+                                    <th>
+                                        RANK
+                                    </th>
+
+                                    <th>
+                                        POSTING
+                                    </th>
+
+                                    <th>
+                                        BASIC
+                                    </th>
+
+                                    <th>
+                                        STATUS
+                                    </th>
 
                                 </tr>
 
                             </thead>
 
-                            <tbody id="employeeTable">
 
-                            </tbody>
+                            <tbody
+                                id="employeeTable"
+                            ></tbody>
 
                         </table>
 
                     </div>
 
+
                 </div>
+
 
             </section>
 
 
-            <!-- SALARY -->
-            <section id="salary" class="page hidden">
+
+            <!-- =================================================
+                 SALARY
+            ================================================== -->
+
+            <section
+                id="salary"
+                class="page hidden"
+            >
+
 
                 <div class="page-title">
 
                     <div>
-                        <h2>SALARY</h2>
-                        <p>Monthly salary management</p>
-                    </div>
 
-                </div>
+                        <h2>
+                            SALARY
+                        </h2>
 
-                <div class="salary-cards">
+                        <p>
+                            Monthly salary management
+                        </p>
 
-                    <div>
-                        <small>BASIC PAY</small>
-                        <strong id="salaryBasic">₹ 0</strong>
-                    </div>
-
-                    <div>
-                        <small>GROSS TOTAL</small>
-                        <strong>₹ 0</strong>
-                    </div>
-
-                    <div>
-                        <small>DEDUCTION</small>
-                        <strong>₹ 0</strong>
-                    </div>
-
-                    <div>
-                        <small>NET TOTAL</small>
-                        <strong>₹ 0</strong>
                     </div>
 
                 </div>
 
 
-                <div class="box module">
+                <div class="box module-box">
 
                     <h3>
-                        SALARY ENTRY
+                        SALARY MANAGEMENT
                     </h3>
 
                     <p>
-                        Salary fields यहाँ add किए जाएंगे।
-                        आपके पुराने software के BASIC, DA, HRA,
-                        GPF, DPF, Recovery, Gross, Deduction और Net
-                        Total fields भी इसी module में जोड़े जा सकते हैं।
+                        Salary module will be developed here.
                     </p>
 
+                    <div class="module-buttons">
+
+                        <button>
+                            SALARY ENTRY
+                        </button>
+
+                        <button>
+                            SALARY SEARCH
+                        </button>
+
+                        <button>
+                            SALARY REPORT
+                        </button>
+
+                    </div>
+
                 </div>
+
 
             </section>
 
 
-            <!-- COMMON MODULES -->
 
-            <section id="petrol" class="page hidden">
+            <!-- =================================================
+                 PETROL
+            ================================================== -->
+
+            <section
+                id="petrol"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>PETROL</h2>
-                        <p>Petrol records</p>
+
+                        <h2>
+                            PETROL
+                        </h2>
+
+                        <p>
+                            Petrol management
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>PETROL MANAGEMENT</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        PETROL MANAGEMENT
+                    </h3>
+
                     <p>
-                        Petrol quantity, amount, month और employee-wise records.
+                        Petrol records, quantity, amount,
+                        month and employee-wise details.
                     </p>
+
+                    <div class="module-buttons">
+
+                        <button>
+                            PETROL ENTRY
+                        </button>
+
+                        <button>
+                            SEARCH
+                        </button>
+
+                        <button>
+                            REPORT
+                        </button>
+
+                    </div>
+
                 </div>
+
             </section>
 
 
-            <section id="reward" class="page hidden">
+
+            <!-- =================================================
+                 REWARD
+            ================================================== -->
+
+            <section
+                id="reward"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>REWARD</h2>
-                        <p>Reward records</p>
+
+                        <h2>
+                            REWARD
+                        </h2>
+
+                        <p>
+                            Reward records
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>REWARD MANAGEMENT</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        REWARD MANAGEMENT
+                    </h3>
+
                     <p>
-                        Reward order, date, type और amount/details.
+                        Reward order, date, type and details.
                     </p>
+
+                    <div class="module-buttons">
+
+                        <button>
+                            NEW REWARD
+                        </button>
+
+                        <button>
+                            SEARCH
+                        </button>
+
+                        <button>
+                            REPORT
+                        </button>
+
+                    </div>
+
                 </div>
+
             </section>
 
 
-            <section id="bank" class="page hidden">
+
+            <!-- =================================================
+                 BANK
+            ================================================== -->
+
+            <section
+                id="bank"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>BANK</h2>
-                        <p>Employee bank information</p>
+
+                        <h2>
+                            BANK
+                        </h2>
+
+                        <p>
+                            Employee bank details
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>BANK MANAGEMENT</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        BANK MANAGEMENT
+                    </h3>
+
                     <p>
-                        Bank Name, Branch, Account Number और IFSC.
+                        Bank Name, Branch, Account Number,
+                        IFSC and bank related information.
                     </p>
+
+                    <div class="module-buttons">
+
+                        <button>
+                            BANK ENTRY
+                        </button>
+
+                        <button>
+                            SEARCH
+                        </button>
+
+                        <button>
+                            BANK REPORT
+                        </button>
+
+                    </div>
+
                 </div>
+
             </section>
 
 
-            <section id="bills" class="page hidden">
+
+            <!-- =================================================
+                 BILLS
+            ================================================== -->
+
+            <section
+                id="bills"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>BILLS</h2>
-                        <p>Bill management</p>
+
+                        <h2>
+                            BILLS
+                        </h2>
+
+                        <p>
+                            Bill management
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>BILL MANAGEMENT</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        BILL MANAGEMENT
+                    </h3>
+
                     <p>
-                        Bill Number, Month, Amount और Status.
+                        Bill number, month, amount,
+                        type and status.
                     </p>
-                </div>
-            </section>
 
+                    <div class="module-buttons">
 
-            <section id="billregister" class="page hidden">
-                <div class="page-title">
-                    <div>
-                        <h2>BILL REGISTER</h2>
-                        <p>Bill register and reports</p>
+                        <button>
+                            NEW BILL
+                        </button>
+
+                        <button>
+                            SEARCH BILL
+                        </button>
+
+                        <button>
+                            BILL REPORT
+                        </button>
+
                     </div>
-                </div>
-
-                <div class="report-buttons">
-
-                    <button onclick="exportCSV()">
-                        EXPORT EMPLOYEE CSV
-                    </button>
-
-                    <button onclick="window.print()">
-                        PRINT REPORT
-                    </button>
 
                 </div>
 
             </section>
 
 
-            <section id="joining" class="page hidden">
+
+            <!-- =================================================
+                 BILL REGISTER
+            ================================================== -->
+
+            <section
+                id="billregister"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>JOINING</h2>
-                        <p>Joining records</p>
+
+                        <h2>
+                            BILL REGISTER
+                        </h2>
+
+                        <p>
+                            Bill register and reports
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>JOINING MANAGEMENT</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        BILL REGISTER
+                    </h3>
+
+                    <div class="module-buttons">
+
+                        <button onclick="exportCSV()">
+                            EXPORT EMPLOYEE DATA
+                        </button>
+
+                        <button onclick="window.print()">
+                            PRINT
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 JOINING
+            ================================================== -->
+
+            <section
+                id="joining"
+                class="page hidden"
+            >
+
+                <div class="page-title">
+
+                    <div>
+
+                        <h2>
+                            JOINING
+                        </h2>
+
+                        <p>
+                            Joining and appointment records
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="box module-box">
+
+                    <h3>
+                        JOINING MANAGEMENT
+                    </h3>
+
                     <p>
-                        Appointment, joining date और service information.
+                        Appointment, joining date,
+                        posting and service information.
                     </p>
+
                 </div>
+
             </section>
 
 
-            <section id="backup" class="page hidden">
+
+            <!-- =================================================
+                 BACKUP
+            ================================================== -->
+
+            <section
+                id="backup"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>BACKUP</h2>
-                        <p>Database backup</p>
+
+                        <h2>
+                            BACKUP
+                        </h2>
+
+                        <p>
+                            Database backup and restore
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>BACKUP & RESTORE</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        BACKUP & RESTORE
+                    </h3>
+
                     <p>
-                        Database backup और restore system.
+                        Database backup and restore system.
                     </p>
+
                 </div>
+
             </section>
 
 
-            <section id="replace" class="page hidden">
+
+            <!-- =================================================
+                 REPLACE
+            ================================================== -->
+
+            <section
+                id="replace"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>REPLACE</h2>
-                        <p>Find and replace records</p>
+
+                        <h2>
+                            FIND / REPLACE
+                        </h2>
+
+                        <p>
+                            Find and replace information
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>FIND / REPLACE</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        FIND / REPLACE
+                    </h3>
+
                     <p>
-                        Selected table और column में find/replace.
+                        Selected table and column में
+                        data find और replace किया जाएगा।
                     </p>
+
                 </div>
+
             </section>
 
 
-            <section id="settings" class="page hidden">
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <section
+                id="settings"
+                class="page hidden"
+            >
+
                 <div class="page-title">
+
                     <div>
-                        <h2>SETTINGS</h2>
-                        <p>System settings</p>
+
+                        <h2>
+                            SETTINGS
+                        </h2>
+
+                        <p>
+                            System settings
+                        </p>
+
                     </div>
+
                 </div>
 
-                <div class="box module">
-                    <h3>SYSTEM SETTINGS</h3>
+
+                <div class="box module-box">
+
+                    <h3>
+                        SYSTEM SETTINGS
+                    </h3>
+
                     <p>
-                        User, security, financial year और system settings.
+                        User, security, financial year
+                        और system settings.
                     </p>
+
                 </div>
+
             </section>
 
 
@@ -958,14 +1575,18 @@
 
 
         <footer>
+
             MP Police Payroll System
             • Web Edition
             • 2026
+
         </footer>
+
 
     </main>
 
 </div>
+
 
 <script src="script.js"></script>
 
