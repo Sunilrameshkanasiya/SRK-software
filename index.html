@@ -17,66 +17,43 @@
 
 <div id="loginPage" class="login-page">
 
-    <div class="login-box">
+    <div class="login-card">
 
         <div class="login-logo">
             MP
         </div>
 
-        <h1>MP POLICE</h1>
-
-        <h2>PAYROLL SYSTEM</h2>
-
-        <p class="login-subtitle">
-            Employee Management System
-        </p>
-
+        <h1>MP Police Payroll</h1>
+        <p class="login-subtitle">Employee Management System</p>
 
         <div class="login-form">
 
-            <label>
-                USER NAME
-            </label>
-
+            <label>Username</label>
             <input
                 type="text"
                 id="loginUsername"
-                placeholder="Enter User Name"
+                placeholder="Enter username"
                 autocomplete="username"
             >
 
-
-            <label>
-                PASSWORD
-            </label>
-
+            <label>Password</label>
             <input
                 type="password"
                 id="loginPassword"
-                placeholder="Enter Password"
+                placeholder="Enter password"
                 autocomplete="current-password"
-                onkeydown="loginEnter(event)"
             >
 
-
-            <button
-                class="login-button"
-                onclick="login()"
-            >
+            <button class="login-button" onclick="login()">
                 LOGIN
             </button>
 
-
-            <div
-                id="loginMessage"
-                class="login-message"
-            ></div>
+            <div id="loginMessage" class="login-message"></div>
 
         </div>
 
-
         <div class="login-footer">
-            MP Police Payroll System • 2026
+            MP Police Department
         </div>
 
     </div>
@@ -84,61 +61,38 @@
 </div>
 
 
-
 <!-- =====================================================
-     MAIN SOFTWARE
+     SOFTWARE
 ===================================================== -->
 
-<div
-    id="software"
-    class="software hidden"
->
+<div id="software" class="software hidden">
 
-
-    <!-- =================================================
-         LEFT SIDEBAR
-    ================================================== -->
+    <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
-
-        <!-- LOGO -->
-
-        <div class="logo-box">
-
-            <div class="logo">
-                MP
-            </div>
+        <div class="sidebar-logo">
+            <div class="logo-circle">MP</div>
 
             <div>
-
-                <b>MP POLICE</b>
-
-                <small>
-                    PAYROLL SYSTEM
-                </small>
-
+                <strong>MP POLICE</strong>
+                <small>PAYROLL SYSTEM</small>
             </div>
-
         </div>
 
 
-        <!-- MENU -->
-
-        <div class="menu">
-
+        <div class="menu-area">
 
             <div class="menu-heading">
                 MAIN MENU
             </div>
-
 
             <button
                 class="menu-button active"
                 onclick="openPage('home', this)"
             >
                 <span>⌂</span>
-                HOME
+                Home
             </button>
 
 
@@ -147,7 +101,7 @@
                 onclick="openPage('profile', this)"
             >
                 <span>👤</span>
-                PROFILE
+                Employee Profile
             </button>
 
 
@@ -156,7 +110,7 @@
                 onclick="openPage('salary', this)"
             >
                 <span>₹</span>
-                SALARY
+                Salary
             </button>
 
 
@@ -165,7 +119,7 @@
                 onclick="openPage('petrol', this)"
             >
                 <span>⛽</span>
-                PETROL
+                Petrol
             </button>
 
 
@@ -174,7 +128,16 @@
                 onclick="openPage('reward', this)"
             >
                 <span>★</span>
-                REWARD
+                Reward
+            </button>
+
+
+            <button
+                class="menu-button"
+                onclick="openPage('bill', this)"
+            >
+                <span>▣</span>
+                Bill
             </button>
 
 
@@ -182,58 +145,31 @@
                 class="menu-button"
                 onclick="openPage('bank', this)"
             >
-                <span>▣</span>
-                BANK
+                <span>🏦</span>
+                Bank
             </button>
 
 
             <button
                 class="menu-button"
-                onclick="openPage('bills', this)"
+                onclick="openPage('gpf', this)"
             >
-                <span>▤</span>
-                BILLS
+                <span>📁</span>
+                GPF / DPF
             </button>
 
 
-            <button
-                class="menu-button"
-                onclick="openPage('billregister', this)"
-            >
-                <span>▥</span>
-                BILL REGISTER
-            </button>
-
-
-            <div class="menu-heading system-heading">
-                OTHER
+            <div class="menu-heading second">
+                REPORTS
             </div>
 
 
             <button
                 class="menu-button"
-                onclick="openPage('joining', this)"
+                onclick="openPage('reports', this)"
             >
-                <span>↪</span>
-                JOINING
-            </button>
-
-
-            <button
-                class="menu-button"
-                onclick="openPage('backup', this)"
-            >
-                <span>◩</span>
-                BACKUP
-            </button>
-
-
-            <button
-                class="menu-button"
-                onclick="openPage('replace', this)"
-            >
-                <span>⇄</span>
-                REPLACE
+                <span>📊</span>
+                Reports
             </button>
 
 
@@ -242,1346 +178,583 @@
                 onclick="openPage('settings', this)"
             >
                 <span>⚙</span>
-                SETTINGS
+                Settings
             </button>
-
 
         </div>
 
 
-        <!-- USER AREA -->
-
         <div class="sidebar-bottom">
 
-            <div class="user-area">
+            <div class="user-box">
 
                 <div class="user-circle">
-                    S
+                    A
                 </div>
 
-                <div>
-
-                    <b id="loggedUser">
-                        ADMIN
-                    </b>
-
-                    <small>
-                        Administrator
-                    </small>
-
+                <div class="user-details">
+                    <strong id="loggedUser">Admin</strong>
+                    <small>Administrator</small>
                 </div>
 
             </div>
 
 
-            <button
-                class="logout-button"
-                onclick="logout()"
-            >
-                LOG OUT
+            <button class="logout-button" onclick="logout()">
+                ⇥ Logout
             </button>
 
         </div>
-
 
     </aside>
 
 
-
-    <!-- =================================================
-         MAIN
-    ================================================== -->
+    <!-- MAIN AREA -->
 
     <main class="main">
 
-
-        <!-- =================================================
-             TOP HEADER
-        ================================================== -->
+        <!-- TOP HEADER -->
 
         <header class="top-header">
 
+            <div>
 
-            <div class="employee-header">
-
-
-                <div class="employee-title">
-
-                    <h1 id="topName">
-                        MP POLICE PAYROLL
-                    </h1>
-
-                    <div class="employee-info">
-
-                        <span id="topBno">
-                            BNO
-                        </span>
-
-                        <span id="topUnicode">
-                            UNICODE
-                        </span>
-
-                        <span id="topRank">
-                            RANK
-                        </span>
-
-                        <span id="topPosting">
-                            POSTING
-                        </span>
-
-                    </div>
-
+                <div class="system-title">
+                    MP Police Payroll System
                 </div>
 
-
-                <div
-                    class="employee-number"
-                    id="topCode"
-                >
-                    —
+                <div class="system-subtitle">
+                    Employee Management & Payroll
                 </div>
-
 
             </div>
 
 
+            <div class="top-right">
 
-            <div class="top-controls">
-
-
-                <select id="month">
-
-                    <option>January</option>
-                    <option>February</option>
-                    <option>March</option>
-                    <option>April</option>
-                    <option>May</option>
-                    <option>June</option>
-                    <option>July</option>
-                    <option>August</option>
-
-                    <option selected>
-                        September
-                    </option>
-
-                    <option>October</option>
-                    <option>November</option>
-                    <option>December</option>
-
-                </select>
-
-
-                <input
-                    type="number"
-                    id="year"
-                    value="2026"
-                >
-
-
-                <div
-                    class="date-time"
-                    id="clock"
-                >
-                    28-09-2026 23:00:00
+                <div id="clock" class="clock">
+                    --
                 </div>
 
-
-                <div class="top-user">
-
-                    <b id="topUser">
-                        ADMIN
-                    </b>
-
-                    <small>
-                        USER
-                    </small>
-
+                <div class="top-user" id="topUser">
+                    Admin
                 </div>
-
-
-                <button
-                    class="top-logout"
-                    onclick="logout()"
-                >
-                    LOG OUT
-                </button>
-
 
             </div>
-
 
         </header>
 
 
-
         <!-- =================================================
-             OLD SOFTWARE STYLE TABS
-        ================================================== -->
+             HOME
+        ================================================= -->
 
-        <nav class="tabs">
+        <section id="home" class="page">
 
+            <div class="home-page">
 
-            <button
-                onclick="openPage('profile')"
-            >
-                PROFILE
-            </button>
+                <div class="home-content">
 
-
-            <button
-                onclick="openPage('salary')"
-            >
-                SALARY
-            </button>
-
-
-            <button
-                onclick="openPage('petrol')"
-            >
-                PETROL
-            </button>
-
-
-            <button
-                onclick="openPage('reward')"
-            >
-                REWARD
-            </button>
-
-
-            <button
-                onclick="openPage('bills')"
-            >
-                BILLS
-            </button>
-
-
-            <button
-                onclick="openPage('bank')"
-            >
-                BANK
-            </button>
-
-
-            <button
-                onclick="openPage('home')"
-            >
-                HOME
-            </button>
-
-
-            <button
-                onclick="openPage('billregister')"
-            >
-                BILL REGISTER
-            </button>
-
-
-            <button
-                onclick="openPage('joining')"
-            >
-                JOINING
-            </button>
-
-
-            <button
-                onclick="openPage('backup')"
-            >
-                BACKUP
-            </button>
-
-
-            <button
-                onclick="openPage('replace')"
-            >
-                REPLACE
-            </button>
-
-
-            <button
-                onclick="openPage('settings')"
-            >
-                SETTINGS
-            </button>
-
-
-        </nav>
-
-
-
-        <!-- =================================================
-             CONTENT
-        ================================================== -->
-
-        <div class="content">
-
-
-            <!-- =================================================
-                 HOME
-            ================================================== -->
-
-            <section
-                id="home"
-                class="page"
-            >
-
-                <div class="home-screen">
-
-                    <div class="home-logo">
+                    <div class="home-icon">
                         MP
                     </div>
 
-
-                    <h2>
-                        MP POLICE PAYROLL SYSTEM
-                    </h2>
-
+                    <h1>Welcome to MP Police Payroll System</h1>
 
                     <p>
-                        Employee & Payroll Management System
+                        Select a module from the left menu
+                        to continue.
                     </p>
 
-
-                    <div class="home-line"></div>
-
-
-                    <span>
-                        Select a module from the menu
-                    </span>
-
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
+        <!-- =================================================
+             PROFILE
+        ================================================= -->
 
-            <!-- =================================================
-                 PROFILE
-            ================================================== -->
+        <section id="profile" class="page hidden">
 
-            <section
-                id="profile"
-                class="page hidden"
-            >
+            <div class="page-header">
 
+                <div>
+                    <h1>Employee Profile</h1>
+                    <p>Employee basic information and service details</p>
+                </div>
 
-                <div class="page-title">
+                <div class="record-number">
+                    Employee Entry
+                </div>
 
-                    <div>
-
-                        <h2>
-                            EMPLOYEE PROFILE
-                        </h2>
-
-                        <p>
-                            Employee basic and service information
-                        </p>
-
-                    </div>
+            </div>
 
 
-                    <div class="record-number">
+            <div class="card">
 
-                        RECORD:
-                        <b id="recordId">
-                            NEW
-                        </b>
-
-                    </div>
-
+                <div class="card-title">
+                    Employee Identification
                 </div>
 
 
+                <div class="form-grid">
 
-                <!-- PROFILE FORM -->
-
-                <div class="box">
-
-
-                    <div class="box-title">
-                        BASIC INFORMATION
+                    <div class="field">
+                        <label>BNO</label>
+                        <input id="bno" type="text">
                     </div>
 
 
-                    <form
-                        id="employeeForm"
-                        autocomplete="off"
+                    <div class="field">
+                        <label>UNICODE *</label>
+                        <input id="unicode" type="text">
+                    </div>
+
+
+                    <div class="field field-large">
+                        <label>Employee Name *</label>
+                        <input id="name" type="text">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Rank</label>
+
+                        <select id="rank">
+
+                            <option value="">Select Rank</option>
+                            <option>Constable</option>
+                            <option>Head Constable</option>
+                            <option>ASI</option>
+                            <option>SI</option>
+                            <option>Inspector</option>
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+                        <label>PRAN</label>
+                        <input id="pran" type="text">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Basic Pay</label>
+                        <input id="basic" type="number">
+                    </div>
+
+
+                    <div class="field field-large">
+                        <label>Posting</label>
+                        <input id="posting" type="text">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Mobile</label>
+                        <input id="mobile" type="tel">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Service Information
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>GPF / DPF / NPS</label>
+                        <input id="gpf" type="text">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Date of Birth</label>
+                        <input id="dob" type="date">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Date of Appointment</label>
+                        <input id="doa" type="date">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Date of Joining</label>
+                        <input id="doj" type="date">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Date of Retirement</label>
+                        <input id="dor" type="date">
+                    </div>
+
+
+                    <div class="field">
+                        <label>Status</label>
+
+                        <select id="status">
+
+                            <option value="Active">Active</option>
+                            <option value="Retired">Retired</option>
+                            <option value="Transferred">Transferred</option>
+                            <option value="Inactive">Inactive</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field field-full">
+                        <label>Remark</label>
+                        <textarea id="remark"></textarea>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="button-row">
+
+                <button class="btn save" onclick="saveEmployee()">
+                    Save
+                </button>
+
+                <button class="btn update" onclick="updateEmployee()">
+                    Update
+                </button>
+
+                <button class="btn delete" onclick="deleteEmployee()">
+                    Delete
+                </button>
+
+                <button class="btn search" onclick="searchEmployee()">
+                    Search
+                </button>
+
+                <button class="btn clear" onclick="clearForm()">
+                    Clear
+                </button>
+
+            </div>
+
+
+            <div class="card table-card">
+
+                <div class="table-header">
+
+                    <div class="card-title">
+                        Employee Records
+                    </div>
+
+                    <input
+                        type="text"
+                        id="tableSearch"
+                        placeholder="Search employee..."
+                        oninput="renderTable()"
                     >
 
-
-                        <div class="form-grid">
-
-
-                            <!-- BNO -->
-
-                            <div class="field">
-
-                                <label>
-                                    BNO
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="bno"
-                                    placeholder="Enter BNO"
-                                >
-
-                            </div>
-
-
-
-                            <!-- UNICODE -->
-
-                            <div class="field">
-
-                                <label>
-                                    UNICODE *
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="unicode"
-                                    placeholder="Unique Unicode"
-                                >
-
-                            </div>
-
-
-
-                            <!-- NAME -->
-
-                            <div class="field large">
-
-                                <label>
-                                    EMPLOYEE NAME *
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="name"
-                                    placeholder="Employee Name"
-                                >
-
-                            </div>
-
-
-
-                            <!-- RANK -->
-
-                            <div class="field">
-
-                                <label>
-                                    RANK
-                                </label>
-
-                                <select id="rank">
-
-                                    <option value="">
-                                        Select Rank
-                                    </option>
-
-                                    <option>
-                                        CONST
-                                    </option>
-
-                                    <option>
-                                        HEAD CONST
-                                    </option>
-
-                                    <option>
-                                        ASI
-                                    </option>
-
-                                    <option>
-                                        SI
-                                    </option>
-
-                                    <option>
-                                        INSPECTOR
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-
-                            <!-- PRAN -->
-
-                            <div class="field">
-
-                                <label>
-                                    PRAN NO.
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="pran"
-                                    placeholder="PRAN Number"
-                                >
-
-                            </div>
-
-
-
-                            <!-- BASIC -->
-
-                            <div class="field">
-
-                                <label>
-                                    BASIC PAY
-                                </label>
-
-                                <input
-                                    type="number"
-                                    id="basic"
-                                    placeholder="Basic Pay"
-                                >
-
-                            </div>
-
-
-
-                            <!-- POSTING -->
-
-                            <div class="field">
-
-                                <label>
-                                    POSTING
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="posting"
-                                    placeholder="Posting"
-                                >
-
-                            </div>
-
-
-
-                            <!-- MOBILE -->
-
-                            <div class="field">
-
-                                <label>
-                                    MOBILE
-                                </label>
-
-                                <input
-                                    type="tel"
-                                    id="mobile"
-                                    placeholder="Mobile Number"
-                                >
-
-                            </div>
-
-
-
-                            <!-- GPF -->
-
-                            <div class="field">
-
-                                <label>
-                                    GPF / DPF / NPS
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="gpf"
-                                    placeholder="Account Number"
-                                >
-
-                            </div>
-
-
-
-                            <!-- DOB -->
-
-                            <div class="field">
-
-                                <label>
-                                    DATE OF BIRTH
-                                </label>
-
-                                <input
-                                    type="date"
-                                    id="dob"
-                                >
-
-                            </div>
-
-
-
-                            <!-- DOA -->
-
-                            <div class="field">
-
-                                <label>
-                                    DATE OF APPOINTMENT
-                                </label>
-
-                                <input
-                                    type="date"
-                                    id="doa"
-                                >
-
-                            </div>
-
-
-
-                            <!-- DOJ -->
-
-                            <div class="field">
-
-                                <label>
-                                    DATE OF JOINING
-                                </label>
-
-                                <input
-                                    type="date"
-                                    id="doj"
-                                >
-
-                            </div>
-
-
-
-                            <!-- DOR -->
-
-                            <div class="field">
-
-                                <label>
-                                    DATE OF RETIREMENT
-                                </label>
-
-                                <input
-                                    type="date"
-                                    id="dor"
-                                >
-
-                            </div>
-
-
-
-                            <!-- STATUS -->
-
-                            <div class="field">
-
-                                <label>
-                                    STATUS
-                                </label>
-
-                                <select id="status">
-
-                                    <option>
-                                        ACTIVE
-                                    </option>
-
-                                    <option>
-                                        TRANSFERRED
-                                    </option>
-
-                                    <option>
-                                        RETIRED
-                                    </option>
-
-                                    <option>
-                                        INACTIVE
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-
-                            <!-- REMARK -->
-
-                            <div class="field large">
-
-                                <label>
-                                    REMARK
-                                </label>
-
-                                <textarea
-                                    id="remark"
-                                    placeholder="Remark"
-                                ></textarea>
-
-                            </div>
-
-
-                        </div>
-
-
-
-                        <!-- BUTTONS -->
-
-                        <div class="buttons">
-
-
-                            <button
-                                type="button"
-                                class="btn-save"
-                                onclick="saveEmployee()"
-                            >
-                                SAVE
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="btn-update"
-                                onclick="updateEmployee()"
-                            >
-                                UPDATE
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="btn-delete"
-                                onclick="deleteEmployee()"
-                            >
-                                DELETE
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="btn-search"
-                                onclick="searchEmployee()"
-                            >
-                                SEARCH
-                            </button>
-
-
-                            <button
-                                type="button"
-                                class="btn-clear"
-                                onclick="clearForm()"
-                            >
-                                CLEAR
-                            </button>
-
-
-                        </div>
-
-
-                    </form>
-
-
                 </div>
 
 
+                <div class="table-container">
 
-                <!-- RECORD TABLE -->
+                    <table>
 
-                <div class="box">
+                        <thead>
 
+                            <tr>
+                                <th>UNICODE</th>
+                                <th>BNO</th>
+                                <th>Name</th>
+                                <th>Rank</th>
+                                <th>Posting</th>
+                                <th>Basic</th>
+                                <th>Status</th>
+                            </tr>
 
-                    <div class="box-title table-title">
+                        </thead>
 
-                        <span>
-                            EMPLOYEE RECORDS
-                        </span>
+                        <tbody id="employeeTable">
 
+                        </tbody>
 
-                        <input
-                            type="text"
-                            id="tableSearch"
-                            placeholder="Search..."
-                            oninput="renderTable()"
-                        >
-
-                    </div>
-
-
-
-                    <div class="table-scroll">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-
-                                    <th>
-                                        UNICODE
-                                    </th>
-
-                                    <th>
-                                        BNO
-                                    </th>
-
-                                    <th>
-                                        NAME
-                                    </th>
-
-                                    <th>
-                                        RANK
-                                    </th>
-
-                                    <th>
-                                        POSTING
-                                    </th>
-
-                                    <th>
-                                        BASIC
-                                    </th>
-
-                                    <th>
-                                        STATUS
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-                            <tbody
-                                id="employeeTable"
-                            ></tbody>
-
-                        </table>
-
-                    </div>
-
+                    </table>
 
                 </div>
 
+            </div>
 
-            </section>
-
-
-
-            <!-- =================================================
-                 SALARY
-            ================================================== -->
-
-            <section
-                id="salary"
-                class="page hidden"
-            >
+        </section>
 
 
-                <div class="page-title">
+        <!-- =================================================
+             SALARY
+        ================================================= -->
 
-                    <div>
+        <section id="salary" class="page hidden">
 
-                        <h2>
-                            SALARY
-                        </h2>
+            <div class="page-header">
 
-                        <p>
-                            Monthly salary management
-                        </p>
-
-                    </div>
-
+                <div>
+                    <h1>Salary</h1>
+                    <p>Monthly employee salary entry</p>
                 </div>
 
+            </div>
 
-                <div class="box module-box">
 
-                    <h3>
-                        SALARY MANAGEMENT
-                    </h3>
+            <div class="card empty-module">
 
-                    <p>
-                        Salary module will be developed here.
-                    </p>
+                <div class="module-icon">₹</div>
 
-                    <div class="module-buttons">
+                <h2>Salary Module</h2>
 
-                        <button>
-                            SALARY ENTRY
-                        </button>
+                <p>
+                    Salary entry module will be added here.
+                </p>
 
-                        <button>
-                            SALARY SEARCH
-                        </button>
+            </div>
 
-                        <button>
-                            SALARY REPORT
-                        </button>
+        </section>
 
-                    </div>
 
+        <!-- =================================================
+             PETROL
+        ================================================= -->
+
+        <section id="petrol" class="page hidden">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Petrol</h1>
+                    <p>Petrol and vehicle allowance records</p>
                 </div>
 
-
-            </section>
-
+            </div>
 
 
-            <!-- =================================================
-                 PETROL
-            ================================================== -->
+            <div class="card empty-module">
 
-            <section
-                id="petrol"
-                class="page hidden"
-            >
+                <div class="module-icon">⛽</div>
 
-                <div class="page-title">
+                <h2>Petrol Module</h2>
 
-                    <div>
+                <p>
+                    Petrol entry module will be added here.
+                </p>
 
-                        <h2>
-                            PETROL
-                        </h2>
+            </div>
 
-                        <p>
-                            Petrol management
-                        </p>
+        </section>
 
-                    </div>
 
+        <!-- =================================================
+             REWARD
+        ================================================= -->
+
+        <section id="reward" class="page hidden">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Reward</h1>
+                    <p>Employee reward and incentive records</p>
                 </div>
 
+            </div>
 
-                <div class="box module-box">
 
-                    <h3>
-                        PETROL MANAGEMENT
-                    </h3>
+            <div class="card empty-module">
 
-                    <p>
-                        Petrol records, quantity, amount,
-                        month and employee-wise details.
-                    </p>
+                <div class="module-icon">★</div>
 
-                    <div class="module-buttons">
+                <h2>Reward Module</h2>
 
-                        <button>
-                            PETROL ENTRY
-                        </button>
+                <p>
+                    Reward entry module will be added here.
+                </p>
 
-                        <button>
-                            SEARCH
-                        </button>
+            </div>
 
-                        <button>
-                            REPORT
-                        </button>
+        </section>
 
-                    </div>
 
+        <!-- =================================================
+             BILL
+        ================================================= -->
+
+        <section id="bill" class="page hidden">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Bill</h1>
+                    <p>Bill and payment records</p>
                 </div>
 
-            </section>
+            </div>
 
 
+            <div class="card empty-module">
 
-            <!-- =================================================
-                 REWARD
-            ================================================== -->
+                <div class="module-icon">▣</div>
 
-            <section
-                id="reward"
-                class="page hidden"
-            >
+                <h2>Bill Module</h2>
 
-                <div class="page-title">
+                <p>
+                    Bill module will be added here.
+                </p>
 
-                    <div>
+            </div>
 
-                        <h2>
-                            REWARD
-                        </h2>
+        </section>
 
-                        <p>
-                            Reward records
-                        </p>
 
-                    </div>
+        <!-- =================================================
+             BANK
+        ================================================= -->
 
+        <section id="bank" class="page hidden">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Bank</h1>
+                    <p>Employee bank account information</p>
                 </div>
 
+            </div>
 
-                <div class="box module-box">
 
-                    <h3>
-                        REWARD MANAGEMENT
-                    </h3>
+            <div class="card empty-module">
 
-                    <p>
-                        Reward order, date, type and details.
-                    </p>
+                <div class="module-icon">🏦</div>
 
-                    <div class="module-buttons">
+                <h2>Bank Module</h2>
 
-                        <button>
-                            NEW REWARD
-                        </button>
+                <p>
+                    Bank module will be added here.
+                </p>
 
-                        <button>
-                            SEARCH
-                        </button>
+            </div>
 
-                        <button>
-                            REPORT
-                        </button>
+        </section>
 
-                    </div>
 
+        <!-- =================================================
+             GPF
+        ================================================= -->
+
+        <section id="gpf" class="page hidden">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>GPF / DPF</h1>
+                    <p>Fund and recovery records</p>
                 </div>
 
-            </section>
+            </div>
 
 
+            <div class="card empty-module">
 
-            <!-- =================================================
-                 BANK
-            ================================================== -->
+                <div class="module-icon">📁</div>
 
-            <section
-                id="bank"
-                class="page hidden"
-            >
+                <h2>GPF / DPF Module</h2>
 
-                <div class="page-title">
+                <p>
+                    GPF / DPF module will be added here.
+                </p>
 
-                    <div>
+            </div>
 
-                        <h2>
-                            BANK
-                        </h2>
+        </section>
 
-                        <p>
-                            Employee bank details
-                        </p>
 
-                    </div>
+        <!-- =================================================
+             REPORTS
+        ================================================= -->
 
+        <section id="reports" class="page hidden">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Reports</h1>
+                    <p>Employee and payroll reports</p>
                 </div>
 
+            </div>
 
-                <div class="box module-box">
 
-                    <h3>
-                        BANK MANAGEMENT
-                    </h3>
+            <div class="card empty-module">
 
-                    <p>
-                        Bank Name, Branch, Account Number,
-                        IFSC and bank related information.
-                    </p>
+                <div class="module-icon">📊</div>
 
-                    <div class="module-buttons">
+                <h2>Reports Module</h2>
 
-                        <button>
-                            BANK ENTRY
-                        </button>
+                <p>
+                    Reports module will be added here.
+                </p>
 
-                        <button>
-                            SEARCH
-                        </button>
+            </div>
 
-                        <button>
-                            BANK REPORT
-                        </button>
+        </section>
 
-                    </div>
 
+        <!-- =================================================
+             SETTINGS
+        ================================================= -->
+
+        <section id="settings" class="page hidden">
+
+            <div class="page-header">
+
+                <div>
+                    <h1>Settings</h1>
+                    <p>System settings and configuration</p>
                 </div>
 
-            </section>
+            </div>
 
 
+            <div class="card empty-module">
 
-            <!-- =================================================
-                 BILLS
-            ================================================== -->
+                <div class="module-icon">⚙</div>
 
-            <section
-                id="bills"
-                class="page hidden"
-            >
+                <h2>Settings</h2>
 
-                <div class="page-title">
+                <p>
+                    System settings will be added here.
+                </p>
 
-                    <div>
+            </div>
 
-                        <h2>
-                            BILLS
-                        </h2>
-
-                        <p>
-                            Bill management
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="box module-box">
-
-                    <h3>
-                        BILL MANAGEMENT
-                    </h3>
-
-                    <p>
-                        Bill number, month, amount,
-                        type and status.
-                    </p>
-
-                    <div class="module-buttons">
-
-                        <button>
-                            NEW BILL
-                        </button>
-
-                        <button>
-                            SEARCH BILL
-                        </button>
-
-                        <button>
-                            BILL REPORT
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 BILL REGISTER
-            ================================================== -->
-
-            <section
-                id="billregister"
-                class="page hidden"
-            >
-
-                <div class="page-title">
-
-                    <div>
-
-                        <h2>
-                            BILL REGISTER
-                        </h2>
-
-                        <p>
-                            Bill register and reports
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="box module-box">
-
-                    <h3>
-                        BILL REGISTER
-                    </h3>
-
-                    <div class="module-buttons">
-
-                        <button onclick="exportCSV()">
-                            EXPORT EMPLOYEE DATA
-                        </button>
-
-                        <button onclick="window.print()">
-                            PRINT
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 JOINING
-            ================================================== -->
-
-            <section
-                id="joining"
-                class="page hidden"
-            >
-
-                <div class="page-title">
-
-                    <div>
-
-                        <h2>
-                            JOINING
-                        </h2>
-
-                        <p>
-                            Joining and appointment records
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="box module-box">
-
-                    <h3>
-                        JOINING MANAGEMENT
-                    </h3>
-
-                    <p>
-                        Appointment, joining date,
-                        posting and service information.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 BACKUP
-            ================================================== -->
-
-            <section
-                id="backup"
-                class="page hidden"
-            >
-
-                <div class="page-title">
-
-                    <div>
-
-                        <h2>
-                            BACKUP
-                        </h2>
-
-                        <p>
-                            Database backup and restore
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="box module-box">
-
-                    <h3>
-                        BACKUP & RESTORE
-                    </h3>
-
-                    <p>
-                        Database backup and restore system.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 REPLACE
-            ================================================== -->
-
-            <section
-                id="replace"
-                class="page hidden"
-            >
-
-                <div class="page-title">
-
-                    <div>
-
-                        <h2>
-                            FIND / REPLACE
-                        </h2>
-
-                        <p>
-                            Find and replace information
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="box module-box">
-
-                    <h3>
-                        FIND / REPLACE
-                    </h3>
-
-                    <p>
-                        Selected table and column में
-                        data find और replace किया जाएगा।
-                    </p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================================
-                 SETTINGS
-            ================================================== -->
-
-            <section
-                id="settings"
-                class="page hidden"
-            >
-
-                <div class="page-title">
-
-                    <div>
-
-                        <h2>
-                            SETTINGS
-                        </h2>
-
-                        <p>
-                            System settings
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="box module-box">
-
-                    <h3>
-                        SYSTEM SETTINGS
-                    </h3>
-
-                    <p>
-                        User, security, financial year
-                        और system settings.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-        </div>
+        </section>
 
 
         <footer>
-
             MP Police Payroll System
-            • Web Edition
-            • 2026
-
         </footer>
-
 
     </main>
 
