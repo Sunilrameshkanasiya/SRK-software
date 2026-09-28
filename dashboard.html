@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MP Police Payroll System</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#eef3f8;
+    color:#172033;
+    min-height:100vh;
+}
+
+
+/* =========================
+   MAIN APP
+========================= */
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:235px;
+    min-height:100vh;
+    background:linear-gradient(180deg,#071a35,#102b50);
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index:1000;
+    box-shadow:5px 0 20px rgba(0,0,0,.12);
+}
+
+
+/* Logo */
+
+.logo-area{
+    height:115px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.logo-box{
+    width:52px;
+    height:52px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#ffffff,#cfdcf0);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0c2a52;
+    font-size:25px;
+    font-weight:800;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+.logo-title{
+    margin-top:8px;
+    font-size:13px;
+    letter-spacing:1px;
+    font-weight:600;
+}
+
+
+/* Menu */
+
+.menu{
+    padding:18px 12px;
+}
+
+.menu-title{
+    color:#91a4c0;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    padding:0 12px 10px;
+}
+
+.menu-item{
+    width:100%;
+    height:47px;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:#dbe6f4;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:0 14px;
+    margin:4px 0;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+    text-align:left;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.10);
+    color:white;
+    transform:translateX(2px);
+}
+
+.menu-item.active{
+    background:linear-gradient(90deg,#2374d8,#1454a1);
+    color:white;
+    box-shadow:0 5px 15px rgba(0,85,180,.25);
+}
+
+.menu-icon{
+    width:25px;
+    text-align:center;
+    font-size:18px;
+}
+
+
+/* Bottom user */
+
+.sidebar-bottom{
+    position:absolute;
+    bottom:20px;
+    left:15px;
+    right:15px;
+}
+
+.user-mini{
+    border-top:1px solid rgba(255,255,255,.12);
+    padding-top:15px;
+}
+
+.user-mini-name{
+    font-weight:600;
+    font-size:13px;
+}
+
+.user-mini-role{
+    font-size:11px;
+    color:#9fb0c9;
+    margin-top:3px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.main{
+    margin-left:235px;
+    width:calc(100% - 235px);
+    min-height:100vh;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:76px;
+    background:white;
+    border-bottom:1px solid #dce4ed;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+
+/* Left */
+
+.page-heading{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.mobile-menu{
+    display:none;
+    border:0;
+    background:#edf3fa;
+    width:40px;
+    height:40px;
+    border-radius:9px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.heading-text h2{
+    font-size:20px;
+    color:#142b49;
+}
+
+.heading-text p{
+    font-size:11px;
+    color:#8492a5;
+    margin-top:3px;
+}
+
+
+/* Right */
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.date-box{
+    background:#f2f6fa;
+    border:1px solid #e1e8f0;
+    padding:8px 14px;
+    border-radius:9px;
+    font-size:12px;
+    color:#526277;
+}
+
+.profile-mini{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding-left:10px;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#1d65b9,#0a376c);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:13px;
+}
+
+.profile-name{
+    font-size:12px;
+    font-weight:700;
+    color:#23344c;
+}
+
+.profile-rank{
+    font-size:10px;
+    color:#8996a8;
+    margin-top:2px;
+}
+
+
+/* =========================
+   PAGE AREA
+========================= */
+
+.page{
+    padding:25px;
+}
+
+
+/* =========================
+   EMPLOYEE HEADER
+========================= */
+
+.employee-card{
+    background:white;
+    border:1px solid #e1e7ef;
+    border-radius:15px;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 5px 20px rgba(22,54,91,.05);
+}
+
+.employee-left{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.employee-avatar{
+    width:58px;
+    height:58px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#1b68bd,#0c3970);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    font-weight:700;
+}
+
+.employee-info h3{
+    font-size:17px;
+    color:#172b46;
+}
+
+.employee-info p{
+    font-size:11px;
+    color:#7b899b;
+    margin-top:5px;
+}
+
+.employee-code{
+    display:flex;
+    gap:8px;
+    margin-top:7px;
+}
+
+.code{
+    font-size:10px;
+    background:#edf4fb;
+    color:#34618d;
+    padding:4px 8px;
+    border-radius:5px;
+}
+
+
+/* =========================
+   MONTH BOX
+========================= */
+
+.month-area{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.month-area label{
+    font-size:10px;
+    color:#8491a1;
+}
+
+.month-area select,
+.month-area input{
+    height:35px;
+    border:1px solid #dce4ed;
+    background:#f8fafc;
+    border-radius:7px;
+    padding:0 9px;
+    color:#34465c;
+    outline:none;
+}
+
+
+/* =========================
+   HOME CONTENT
+========================= */
+
+.home-area{
+    margin-top:25px;
+    min-height:calc(100vh - 230px);
+}
+
+
+/* Welcome */
+
+.welcome{
+    background:linear-gradient(135deg,#0d315b,#155fae);
+    color:white;
+    border-radius:16px;
+    padding:28px;
+    position:relative;
+    overflow:hidden;
+}
+
+.welcome:after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    right:-80px;
+    top:-100px;
+    background:rgba(255,255,255,.07);
+}
+
+.welcome h1{
+    font-size:25px;
+    font-weight:600;
+}
+
+.welcome p{
+    font-size:12px;
+    color:#cbdced;
+    margin-top:8px;
+}
+
+
+/* Empty workspace */
+
+.workspace{
+    margin-top:20px;
+    background:white;
+    border:1px solid #e1e7ef;
+    border-radius:16px;
+    min-height:350px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    box-shadow:0 5px 20px rgba(22,54,91,.04);
+}
+
+.workspace-icon{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    background:#eef5fc;
+    color:#3376b8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.workspace h3{
+    color:#4d5e72;
+    font-size:16px;
+    font-weight:600;
+}
+
+.workspace p{
+    margin-top:7px;
+    font-size:11px;
+    color:#98a4b3;
+}
+
+
+/* =========================
+   PAGE PLACEHOLDER
+========================= */
+
+.module-page{
+    display:none;
+}
+
+.module-card{
+    background:white;
+    border-radius:16px;
+    border:1px solid #e0e7ef;
+    padding:25px;
+    min-height:500px;
+    box-shadow:0 5px 20px rgba(20,50,80,.05);
+}
+
+.module-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border-bottom:1px solid #e7edf3;
+    padding-bottom:18px;
+    margin-bottom:25px;
+}
+
+.module-title-icon{
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    background:#edf5fd;
+    color:#2369aa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.module-title h2{
+    font-size:19px;
+    color:#183452;
+}
+
+.module-title p{
+    font-size:10px;
+    color:#8a97a7;
+    margin-top:3px;
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout{
+    background:#fff1f1 !important;
+    color:#d74b4b !important;
+    margin-top:10px;
+}
+
+.logout:hover{
+    background:#ffe0e0 !important;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    text-align:center;
+    padding:15px;
+    color:#99a5b4;
+    font-size:10px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px){
+
+    .sidebar{
+        width:235px;
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+
+    .sidebar.show{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 15px;
+        height:68px;
+    }
+
+    .date-box{
+        display:none;
+    }
+
+    .profile-name,
+    .profile-rank{
+        display:none;
+    }
+
+    .page{
+        padding:15px;
+    }
+
+    .employee-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:18px;
+    }
+
+    .month-area{
+        width:100%;
+    }
+
+    .month-area select,
+    .month-area input{
+        flex:1;
+    }
+
+    .welcome{
+        padding:22px;
+    }
+
+    .welcome h1{
+        font-size:21px;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .heading-text h2{
+        font-size:17px;
+    }
+
+    .employee-info h3{
+        font-size:15px;
+    }
+
+    .employee-left{
+        align-items:flex-start;
+    }
+
+    .employee-avatar{
+        width:48px;
+        height:48px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- ==================================================
+     SIDEBAR
+================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo-area">
+
+        <div class="logo-box">
+            MP
+        </div>
+
+        <div class="logo-title">
+            MP POLICE PAYROLL
+        </div>
+
+    </div>
+
+
+    <div class="menu">
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+
+        <button class="menu-item active" onclick="openPage('home',this)">
+            <span class="menu-icon">⌂</span>
+            <span>HOME</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('profile',this)">
+            <span class="menu-icon">👤</span>
+            <span>PROFILE</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('salary',this)">
+            <span class="menu-icon">₹</span>
+            <span>SALARY</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('petrol',this)">
+            <span class="menu-icon">⛽</span>
+            <span>PETROL</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('reward',this)">
+            <span class="menu-icon">★</span>
+            <span>REWARD</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('bank',this)">
+            <span class="menu-icon">▣</span>
+            <span>BANK</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('bills',this)">
+            <span class="menu-icon">▤</span>
+            <span>BILLS</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('billregister',this)">
+            <span class="menu-icon">▥</span>
+            <span>BILL REGISTER</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('reports',this)">
+            <span class="menu-icon">▤</span>
+            <span>REPORTS</span>
+        </button>
+
+
+        <button class="menu-item" onclick="openPage('settings',this)">
+            <span class="menu-icon">⚙</span>
+            <span>SETTINGS</span>
+        </button>
+
+
+        <button class="menu-item logout" onclick="logout()">
+            <span class="menu-icon">↪</span>
+            <span>LOG OUT</span>
+        </button>
+
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="user-mini">
+
+            <div class="user-mini-name">
+                SUNIL KANASIYA
+            </div>
+
+            <div class="user-mini-role">
+                Administrator • MP Police
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main class="main">
+
+
+<!-- TOP BAR -->
+
+<header class="topbar">
+
+    <div class="page-heading">
+
+        <button class="mobile-menu" onclick="toggleSidebar()">
+            ☰
+        </button>
+
+        <div class="heading-text">
+
+            <h2 id="pageTitle">
+                Home
+            </h2>
+
+            <p>
+                MP Police Payroll Management System
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="top-right">
+
+        <div class="date-box" id="currentDate">
+            28 September 2026
+        </div>
+
+
+        <div class="profile-mini">
+
+            <div class="avatar">
+                SK
+            </div>
+
+            <div>
+
+                <div class="profile-name">
+                    SUNIL
+                </div>
+
+                <div class="profile-rank">
+                    Administrator
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==================================================
+     PAGE
+================================================== -->
+
+<section class="page">
+
+
+<!-- EMPLOYEE HEADER -->
+
+<div class="employee-card">
+
+    <div class="employee-left">
+
+        <div class="employee-avatar">
+            SK
+        </div>
+
+        <div class="employee-info">
+
+            <h3>
+                SUNIL KANASIYA
+            </h3>
+
+            <p>
+                CONSTABLE • MP POLICE
+            </p>
+
+            <div class="employee-code">
+
+                <span class="code">
+                    BNO : 380010562
+                </span>
+
+                <span class="code">
+                    UNICODE : 380010562
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="month-area">
+
+        <label>
+            MONTH
+        </label>
+
+        <select id="month">
+
+            <option>January</option>
+            <option>February</option>
+            <option>March</option>
+            <option>April</option>
+            <option>May</option>
+            <option>June</option>
+            <option>July</option>
+            <option>August</option>
+            <option selected>September</option>
+            <option>October</option>
+            <option>November</option>
+            <option>December</option>
+
+        </select>
+
+
+        <input
+            type="number"
+            value="2026"
+            id="year"
+            min="2000"
+            max="2100"
+        >
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     HOME PAGE
+================================================== -->
+
+<div id="home" class="home-area page-section">
+
+    <div class="welcome">
+
+        <h1>
+            Welcome to Payroll System
+        </h1>
+
+        <p>
+            Manage employee profile, salary, petrol, reward,
+            bank and bill information from one place.
+        </p>
+
+    </div>
+
+
+    <div class="workspace">
+
+        <div class="workspace-icon">
+            ⌂
+        </div>
+
+        <h3>
+            Home Workspace
+        </h3>
+
+        <p>
+            Select an option from the menu to continue.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     PROFILE
+================================================== -->
+
+<div id="profile" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                👤
+            </div>
+
+            <div>
+
+                <h2>
+                    Employee Profile
+                </h2>
+
+                <p>
+                    Employee personal and service information
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Profile Entry Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     SALARY
+================================================== -->
+
+<div id="salary" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ₹
+            </div>
+
+            <div>
+
+                <h2>
+                    Salary
+                </h2>
+
+                <p>
+                    Monthly employee salary information
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Salary Entry Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- PETROL -->
+
+<div id="petrol" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ⛽
+            </div>
+
+            <div>
+
+                <h2>
+                    Petrol
+                </h2>
+
+                <p>
+                    Petrol allowance and vehicle records
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Petrol Entry Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- REWARD -->
+
+<div id="reward" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ★
+            </div>
+
+            <div>
+
+                <h2>
+                    Reward
+                </h2>
+
+                <p>
+                    Reward and incentive records
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Reward Entry Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- BANK -->
+
+<div id="bank" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ▣
+            </div>
+
+            <div>
+
+                <h2>
+                    Bank
+                </h2>
+
+                <p>
+                    Employee bank account information
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Bank Entry Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- BILLS -->
+
+<div id="bills" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ▤
+            </div>
+
+            <div>
+
+                <h2>
+                    Bills
+                </h2>
+
+                <p>
+                    Employee and department bills
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Bills Entry Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- BILL REGISTER -->
+
+<div id="billregister" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ▥
+            </div>
+
+            <div>
+
+                <h2>
+                    Bill Register
+                </h2>
+
+                <p>
+                    Bill registration and tracking
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Bill Register Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- REPORTS -->
+
+<div id="reports" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ▤
+            </div>
+
+            <div>
+
+                <h2>
+                    Reports
+                </h2>
+
+                <p>
+                    Generate payroll reports
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Reports Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- SETTINGS -->
+
+<div id="settings" class="module-page page-section">
+
+    <div class="module-card">
+
+        <div class="module-title">
+
+            <div class="module-title-icon">
+                ⚙
+            </div>
+
+            <div>
+
+                <h2>
+                    Settings
+                </h2>
+
+                <p>
+                    System and user settings
+                </p>
+
+            </div>
+
+        </div>
+
+        <p>
+            Settings Page
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="footer">
+
+    MP Police Payroll System © 2026
+
+</div>
+
+
+</section>
+
+</main>
+
+</div>
+
+
+
+<script>
+
+/* ==========================================
+   PAGE NAVIGATION
+========================================== */
+
+function openPage(pageName, button){
+
+    // सभी pages hide
+    const pages = document.querySelectorAll(".page-section");
+
+    pages.forEach(function(page){
+
+        page.style.display = "none";
+
+    });
+
+
+    // selected page show
+    const selectedPage = document.getElementById(pageName);
+
+    if(selectedPage){
+
+        if(pageName === "home"){
+
+            selectedPage.style.display = "block";
+
+        }
+        else{
+
+            selectedPage.style.display = "block";
+
+        }
+
+    }
+
+
+    // menu active remove
+    const menuButtons =
+        document.querySelectorAll(".menu-item");
+
+    menuButtons.forEach(function(btn){
+
+        btn.classList.remove("active");
+
+    });
+
+
+    // selected active
+    if(button){
+
+        button.classList.add("active");
+
+    }
+
+
+    // title change
+
+    const titles = {
+
+        home:"Home",
+        profile:"Employee Profile",
+        salary:"Salary",
+        petrol:"Petrol",
+        reward:"Reward",
+        bank:"Bank",
+        bills:"Bills",
+        billregister:"Bill Register",
+        reports:"Reports",
+        settings:"Settings"
+
+    };
+
+
+    document.getElementById("pageTitle").innerText =
+        titles[pageName] || "Payroll System";
+
+
+    // mobile sidebar close
+    document.getElementById("sidebar")
+        .classList.remove("show");
+
+
+    // top par scroll
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+
+/* ==========================================
+   MOBILE SIDEBAR
+========================================== */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("show");
+
+}
+
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+function logout(){
+
+    if(confirm("Are you sure you want to logout?")){
+
+        /*
+        बाद में यहाँ आपके login page का नाम रहेगा।
+        उदाहरण:
+        window.location.href = "index.html";
+        */
+
+        window.location.href = "index.html";
+
+    }
+
+}
+
+
+
+/* ==========================================
+   DATE
+========================================== */
+
+function showDate(){
+
+    const now = new Date();
+
+    const options = {
+        day:"2-digit",
+        month:"long",
+        year:"numeric"
+    };
+
+    document.getElementById("currentDate")
+        .innerText =
+        now.toLocaleDateString("en-IN",options);
+
+}
+
+showDate();
+
+
+
+/* ==========================================
+   DEFAULT HOME
+========================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    const pages =
+        document.querySelectorAll(".page-section");
+
+    pages.forEach(function(page){
+
+        if(page.id !== "home"){
+
+            page.style.display = "none";
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
