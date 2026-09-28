@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Police Payroll - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-card">
+
+        <div class="logo">MP</div>
+
+        <h1>MP Police</h1>
+        <h2>Payroll Management System</h2>
+
+        <p class="welcome">
+            Welcome! Please login to continue.
+        </p>
+
+        <form onsubmit="login(event)">
+
+            <label>User ID</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter User ID"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+                LOGIN
+            </button>
+
+            <p id="message"></p>
+
+        </form>
+
+        <div class="login-footer">
+            MP Police Payroll Software
+        </div>
+
+    </div>
+
+
+<script>
+
+function login(event) {
+
+    event.preventDefault();
+
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if (username === "admin" && password === "1234") {
+
+        document.getElementById("message").innerHTML =
+            "Login Successful...";
+
+        document.getElementById("message").style.color = "green";
+
+        setTimeout(function () {
+
+            window.location.href = "dashboard.html";
+
+        }, 300);
+
+    } 
+    else {
+
+        document.getElementById("message").innerHTML =
+            "Wrong User ID or Password";
+
+        document.getElementById("message").style.color = "red";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MP Police Payroll System - Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+
+        <div class="brand">
+            <div class="brand-logo">MP</div>
+
+            <div>
+                <h1>MP Police Payroll</h1>
+                <span>Employee Management System</span>
+            </div>
+        </div>
+
+        <button class="logout-btn"
+                onclick="logout()">
+            Logout
+        </button>
+
+    </header>
+
+
+    <!-- MAIN LAYOUT -->
+    <div class="dashboard-layout">
+
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="menu-title">
+                MAIN MENU
+            </div>
+
+            <button class="menu-btn active"
+                    onclick="showSection('employeeSection')">
+                👤 Employee
+            </button>
+
+            <button class="menu-btn"
+                    onclick="showSection('salarySection')">
+                💰 Salary
+            </button>
+
+            <button class="menu-btn"
+                    onclick="showSection('bankSection')">
+                🏦 Bank
+            </button>
+
+            <button class="menu-btn"
+                    onclick="showSection('gpfSection')">
+                📋 GPF / DPF
+            </button>
+
+            <button class="menu-btn"
+                    onclick="showSection('reportsSection')">
+                📊 Reports
+            </button>
+
+            <div class="menu-title">
+                SYSTEM
+            </div>
+
+            <button class="menu-btn"
+                    onclick="showSection('settingsSection')">
+                ⚙ Settings
+            </button>
+
+        </aside>
+
+
+        <!-- CONTENT -->
+        <main class="main-content">
+
+
+            <!-- DASHBOARD TITLE -->
+            <div class="page-header">
+
+                <div>
+                    <h2>Dashboard</h2>
+                    <p>
+                        Manage employee and payroll information
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- EMPLOYEE SECTION -->
+            <section id="employeeSection"
+                     class="content-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Employee Entry</h2>
+
+                        <p>
+                            Enter employee basic information
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="form-card">
+
+                    <form id="employeeForm">
+
+
+                        <div class="form-grid">
+
+
+                            <!-- BNO -->
+                            <div class="form-group">
+
+                                <label for="bno">
+                                    BNO
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="bno"
+                                    placeholder="Enter BNO"
+                                >
+
+                            </div>
+
+
+                            <!-- UNICODE -->
+                            <div class="form-group">
+
+                                <label for="unicode">
+                                    Unicode
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="unicode"
+                                    placeholder="Enter Unicode"
+                                >
+
+                            </div>
+
+
+                            <!-- NAME -->
+                            <div class="form-group">
+
+                                <label for="name">
+                                    Employee Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="Enter employee name"
+                                >
+
+                            </div>
+
+
+                            <!-- RANK -->
+                            <div class="form-group">
+
+                                <label for="rank">
+                                    Rank
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="rank"
+                                    placeholder="Enter rank"
+                                >
+
+                            </div>
+
+
+                            <!-- PRAN -->
+                            <div class="form-group">
+
+                                <label for="pran">
+                                    PRAN No.
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="pran"
+                                    placeholder="Enter PRAN number"
+                                >
+
+                            </div>
+
+
+                            <!-- BASIC -->
+                            <div class="form-group">
+
+                                <label for="basic">
+                                    Basic Pay
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="basic"
+                                    placeholder="Enter basic pay"
+                                >
+
+                            </div>
+
+
+                            <!-- POSTING -->
+                            <div class="form-group">
+
+                                <label for="posting">
+                                    Posting
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="posting"
+                                    placeholder="Enter posting"
+                                >
+
+                            </div>
+
+
+                            <!-- MOBILE -->
+                            <div class="form-group">
+
+                                <label for="mobile">
+                                    Mobile
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="mobile"
+                                    placeholder="Enter mobile number"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- BUTTONS -->
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                class="btn save-btn"
+                                onclick="saveEmployee()">
+
+                                Save
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn update-btn"
+                                onclick="updateEmployee()">
+
+                                Update
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn delete-btn"
+                                onclick="deleteEmployee()">
+
+                                Delete
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn search-btn"
+                                onclick="searchEmployee()">
+
+                                Search
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn clear-btn"
+                                onclick="clearForm()">
+
+                                Clear
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- SALARY -->
+            <section id="salarySection"
+                     class="content-section hidden">
+
+                <div class="form-card">
+
+                    <h2>Salary Management</h2>
+
+                    <p>
+                        Salary module will be added here.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- BANK -->
+            <section id="bankSection"
+                     class="content-section hidden">
+
+                <div class="form-card">
+
+                    <h2>Bank Details</h2>
+
+                    <p>
+```
